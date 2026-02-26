@@ -94,8 +94,35 @@
         <p>Cracked accounts are OK!</p>
     </div>
     
+    <div class="status" id="server-status">
+        <strong>Server Status:</strong> <span id="status-text">Checking...</span>
+    </div>
+    
     <footer>
         <p>Affiliated with <a href="https://joinpizza.fun">Pizza and Friends</a></p>
     </footer>
+    
+    <script>
+        async function checkServerStatus() {
+            const statusText = document.getElementById('status-text');
+            try {
+                const response = await fetch('https://mcapi.us/server/status?ip=mc.stimmie.dev');
+                const data = await response.json();
+                
+                if (data.online) {
+                    const players = data.players?.now ?? 0;
+                    const maxPlayers = data.players?.max ?? '?';
+                    statusText.innerHTML = `<span class="status-online">● Online</span> — ${players}/${maxPlayers} players`;
+                } else {
+                    statusText.innerHTML = '<span class="status-offline">● Offline</span>';
+                }
+            } catch (error) {
+                statusText.innerHTML = '<span class="status-offline">● Unable to check</span>';
+            }
+        }
+        
+        checkServerStatus();
+        setInterval(checkServerStatus, 60000);
+    </script>
 </body>
 </html>
