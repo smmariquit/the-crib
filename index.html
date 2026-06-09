@@ -72,47 +72,75 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding: 40px 20px;
             position: relative;
             z-index: 1;
         }
 
-        /* Hero Section */
-        h1 {
-            font-size: clamp(3.5rem, 8vw, 5.5rem);
-            text-align: center;
-            margin-bottom: 5px;
-            background: linear-gradient(135deg, #00FFFF 0%, #008B8B 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+        /* Subtle Hero Bar */
+        .hero-bar {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
-        .subtitle {
-            text-align: center;
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        .hero-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .hero-img {
-            display: block;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px auto;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
             border: 2px solid var(--panel-border);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            transition: transform 0.3s;
         }
 
         .hero-img:hover {
             transform: scale(1.05) rotate(2deg);
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0;
+            background: linear-gradient(135deg, #00FFFF 0%, #008B8B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.2));
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
         }
 
         /* Whimsical Glow Button */
@@ -123,13 +151,12 @@
             background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 139, 139, 0.3));
             color: var(--accent-main);
             font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            padding: 16px 36px;
+            padding: 10px 24px;
             border: 1px solid var(--accent-main);
             border-radius: 50px;
             cursor: pointer;
-            margin: 10px auto 20px auto;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.15), inset 0 0 15px rgba(0, 255, 255, 0.1);
             backdrop-filter: blur(5px);
@@ -145,22 +172,21 @@
             transform: translateY(1px);
         }
 
-        .center-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-
         .player-count {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
-            margin-top: 15px;
-            background: rgba(0,0,0,0.3);
-            padding: 8px 20px;
+            background: rgba(0,0,0,0.4);
+            padding: 6px 16px;
             border-radius: 30px;
             border: 1px solid rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
+        }
+
+        /* Content Grid Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
 
         /* Glassmorphism Panels */
@@ -171,8 +197,7 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            padding: 40px 45px;
-            margin-bottom: 30px;
+            padding: 35px 40px;
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -265,9 +290,15 @@
             gap: 16px;
         }
         
-        @media (min-width: 600px) {
-            .cmd-grid {
+        @media (min-width: 900px) {
+            .content-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+            .panel.full-width {
+                grid-column: 1 / -1;
+            }
+            .cmd-grid {
+                grid-template-columns: 1fr 1fr 1fr;
             }
         }
 
@@ -334,9 +365,21 @@
         }
 
         /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .container {
-                padding: 40px 15px;
+        @media (max-width: 768px) {
+            .hero-bar {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .hero-left {
+                flex-direction: column;
+                margin-bottom: 20px;
+            }
+            .hero-right {
+                align-items: center;
+            }
+            .copy-btn {
+                width: 100%;
             }
             .panel {
                 padding: 30px 20px;
@@ -351,9 +394,6 @@
             .panel p, .panel ul, .panel ol {
                 font-size: 1.05rem;
             }
-            .copy-btn {
-                width: 100%;
-            }
             .code-block {
                 word-break: break-all;
             }
@@ -365,117 +405,119 @@
     <div id="canvas-container"></div>
 
     <div class="container">
-        <!-- Hero Section -->
-        <div class="center-wrap">
-            <img src="crib.png" alt="Mr Fresh Cat" class="hero-img">
-            <h1>The Crib</h1>
-            <div class="subtitle">Java & Bedrock 1.21.x</div>
+        <!-- Subtle Hero Bar -->
+        <div class="hero-bar">
+            <div class="hero-left">
+                <img src="crib.png" alt="Mr Fresh Cat" class="hero-img">
+                <div class="hero-text">
+                    <h1>The Crib</h1>
+                    <div class="subtitle">Java & Bedrock 1.21.x</div>
+                </div>
+            </div>
             
-            <button class="copy-btn" id="copyBtn" onclick="copyIP()">
-                Click to Copy IP
-            </button>
-            <div class="code-block" style="font-size: 1.1rem; background: transparent; border: none; color: var(--text-muted);" id="ipDisplay">crib.stimmie.dev</div>
-
-            <div class="player-count" id="status-text">Pinging server...</div>
-        </div>
-
-
-
-        <!-- How to Join -->
-        <div class="panel">
-            <h2>How to Join</h2>
-            <p>Java and Bedrock players share the exact same server and inventory!</p>
-            
-            <h3>Java Edition (PC/Mac)</h3>
-            <ul>
-                <li>Add the IP <span class="code-block">crib.stimmie.dev</span> to your server list and join.</li>
-                <li><strong>Official:</strong> <a href="https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc" target="_blank">Buy Minecraft for $30</a></li>
-                <li><strong>Alternative:</strong> You can install <span>skLauncher</span> to play for free (cracked accounts are supported).</li>
-            </ul>
-
-            <h3>Bedrock Edition (Mobile/Console)</h3>
-            <ul>
-                <li>Change your Bedrock username to <span>exactly match your Java Name</span>.</li>
-                <li>Join the server at <span class="code-block">crib.stimmie.dev</span> (Port: 19132).</li>
-                <li>Type <span class="code-block">/login &lt;password&gt;</span> using your Java password in chat.</li>
-                <li><strong>Android:</strong> You can buy the game for ~50 pesos on the <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" target="_blank">Play Store</a>.</li>
-            </ul>
-            <div class="info-box">
-                <p style="color: var(--accent-green); margin: 0; font-size: 0.95rem;"><strong>Note:</strong> Login sessions are securely saved for 6 hours!</p>
+            <div class="hero-right">
+                <button class="copy-btn" id="copyBtn" onclick="copyIP()">
+                    Copy IP: crib.stimmie.dev
+                </button>
+                <div class="player-count" id="status-text">Pinging server...</div>
             </div>
         </div>
 
-        <!-- Server Info & Details -->
-        <div class="panel">
-            <h2>Server Information</h2>
-            <ul class="no-bullets" style="margin-bottom: 30px;">
-                <li><span>Compatibility:</span> Java and Bedrock</li>
-                <li><span>Uptime:</span> 24/7</li>
-                <li><span>Physical Location:</span> Singapore</li>
-                <li><span>World Map:</span> [Feature under maintenance]</li>
-                <li><span>Game Rules:</span> PvP on, Keep inventory off</li>
-                <li><span>Difficulty:</span> Hard on all worlds</li>
-            </ul>
+        <div class="content-grid">
+            <!-- How to Join -->
+            <div class="panel">
+                <h2>How to Join</h2>
+                <p>Java and Bedrock players share the exact same server and inventory!</p>
+                
+                <h3>Java Edition (PC/Mac)</h3>
+                <ul>
+                    <li>Add the IP <span class="code-block">crib.stimmie.dev</span> to your server list and join.</li>
+                    <li><strong>Official:</strong> <a href="https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc" target="_blank">Buy Minecraft for $30</a></li>
+                    <li><strong>Alternative:</strong> You can install <span>skLauncher</span> to play for free (cracked accounts are supported).</li>
+                </ul>
 
-            <h3>Worlds (Borders)</h3>
-            <ul style="margin-bottom: 30px;">
-                <li><span>Overworld:</span> 20,000 x 20,000 centered at (0,0)</li>
-                <li><span>Nether:</span> 20,000 x 20,000 centered at (0,0)</li>
-                <li><span>End:</span> 20,000 x 20,000 centered at (0,0)</li>
-            </ul>
-
-            <h3>Technical Details</h3>
-            <ul>
-                <li><span>Specs:</span> 2 Cores Shared vCPUs, 8GB RAM, ~140GB Disk</li>
-                <li><span>Simulation Distance:</span> 5 chunks</li>
-                <li><span>View Distance:</span> 8 chunks (soon to be controlled via View Distance Tweaks)</li>
-                <li>Exploits like TNT duplicators are <span>patched</span></li>
-                <li><span>Server software:</span> Paper (type <span class="code-block">/ver</span> in-game)</li>
-                <li>The server is paid for roughly until the <span>1st week of September</span>.</li>
-            </ul>
-        </div>
-
-        <!-- Commands -->
-        <div class="panel">
-            <h2>Basic Commands</h2>
-            <div class="cmd-grid">
-                <div class="cmd-item"><strong>/help</strong><span>Server guide</span></div>
-                <div class="cmd-item"><strong>/back</strong><span>Go to your previous position or death place</span></div>
-                <div class="cmd-item"><strong>/tpa &lt;player&gt;</strong><span>Ask to teleport to someone</span></div>
-                <div class="cmd-item"><strong>/tpahere &lt;player&gt;</strong><span>Ask someone to teleport to you</span></div>
-                <div class="cmd-item"><strong>/sethome &lt;name&gt;</strong><span>Set a home</span></div>
-                <div class="cmd-item"><strong>/home &lt;name&gt;</strong><span>Go to that home</span></div>
-                <div class="cmd-item"><strong>/sb</strong><span>Toggle the scoreboard at the side</span></div>
-                <div class="cmd-item"><strong>/bingoplus</strong><span>Gamble an item</span></div>
-                <div class="cmd-item" style="grid-column: 1 / -1;"><strong>Press Tab</strong><span>See all online players and some server info</span></div>
+                <h3>Bedrock Edition (Mobile/Console)</h3>
+                <ul>
+                    <li>Change your username to <span>match your Java Name</span>.</li>
+                    <li>Join <span class="code-block">crib.stimmie.dev</span> (Port: 19132).</li>
+                    <li>Type <span class="code-block">/login &lt;password&gt;</span> in chat.</li>
+                    <li><strong>Android:</strong> You can buy the game for ~50 pesos on the <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" target="_blank">Play Store</a>.</li>
+                </ul>
+                <div class="info-box">
+                    <p style="color: var(--accent-green); margin: 0; font-size: 0.95rem;"><strong>Note:</strong> Login sessions are securely saved for 6 hours!</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Rules -->
-        <div class="panel">
-            <h2>Rules</h2>
-            <ol>
-                <li><span>Don't be an asshole.</span></li>
-                <li>Mods/resource packs that provide an unfair advantage are <span>not allowed</span>, such as but not limited to X-Ray, Flight, Autohitter, etc.</li>
-                <li>Mods like <span>schematica</span> or <span>litematica</span> are OK, provided that you don't use the Easy Place or similar feature.</li>
-                <li>Players are kindly requested <span>not to build massive farms</span> with many entities like mobs, chests, or hoppers as this could degrade the experience for everyone.</li>
-            </ol>
-        </div>
+            <!-- Server Info & Details -->
+            <div class="panel">
+                <h2>Server Information</h2>
+                <ul class="no-bullets" style="margin-bottom: 30px;">
+                    <li><span>Compatibility:</span> Java and Bedrock</li>
+                    <li><span>Uptime:</span> 24/7</li>
+                    <li><span>Physical Location:</span> Singapore</li>
+                    <li><span>Game Rules:</span> PvP on, Keep inventory off</li>
+                    <li><span>Difficulty:</span> Hard on all worlds</li>
+                </ul>
 
-        <!-- Tools & Links -->
-        <div class="panel">
-            <h2>Tools & Links</h2>
-            <ul>
-                <li><a href="https://bloxelizer.com/schematics" target="_blank">Schema hub</a></li>
-                <li><a href="https://imagetopixelapp.com/" target="_blank">Pixel art generator</a></li>
-                <li><a href="https://www.plotz.co.uk/" target="_blank">3D modeller to schema (Plotz)</a></li>
-                <li><a href="https://www.mcworldtools.com/" target="_blank">World tools</a></li>
-                <li><a href="https://wisehosting.com/tools" target="_blank">Other tools (Wisehosting)</a></li>
-            </ul>
+                <h3>Worlds (Borders)</h3>
+                <ul style="margin-bottom: 30px;">
+                    <li><span>Overworld:</span> 20,000 x 20,000 centered at (0,0)</li>
+                    <li><span>Nether:</span> 20,000 x 20,000 centered at (0,0)</li>
+                    <li><span>End:</span> 20,000 x 20,000 centered at (0,0)</li>
+                </ul>
+
+                <h3>Technical Details</h3>
+                <ul>
+                    <li><span>Specs:</span> 2 Cores Shared vCPUs, 8GB RAM, ~140GB Disk</li>
+                    <li><span>Simulation Distance:</span> 5 chunks</li>
+                    <li><span>View Distance:</span> 8 chunks (soon to be controllable)</li>
+                    <li>Exploits like TNT duplicators are <span>patched</span></li>
+                    <li>The server is paid for roughly until <span>September</span>.</li>
+                </ul>
+            </div>
+
+            <!-- Commands (Full Width) -->
+            <div class="panel full-width">
+                <h2>Basic Commands</h2>
+                <div class="cmd-grid">
+                    <div class="cmd-item"><strong>/help</strong><span>Server guide</span></div>
+                    <div class="cmd-item"><strong>/back</strong><span>Go to previous position or death place</span></div>
+                    <div class="cmd-item"><strong>/tpa &lt;player&gt;</strong><span>Ask to teleport to someone</span></div>
+                    <div class="cmd-item"><strong>/tpahere &lt;player&gt;</strong><span>Ask someone to teleport to you</span></div>
+                    <div class="cmd-item"><strong>/sethome &lt;name&gt;</strong><span>Set a home</span></div>
+                    <div class="cmd-item"><strong>/home &lt;name&gt;</strong><span>Go to that home</span></div>
+                    <div class="cmd-item"><strong>/sb</strong><span>Toggle the scoreboard at the side</span></div>
+                    <div class="cmd-item"><strong>/bingoplus</strong><span>Gamble an item</span></div>
+                    <div class="cmd-item"><strong>Press Tab</strong><span>See all online players</span></div>
+                </div>
+            </div>
+
+            <!-- Rules -->
+            <div class="panel">
+                <h2>Rules</h2>
+                <ol>
+                    <li><span>Don't be an asshole.</span></li>
+                    <li>Mods/resource packs that provide an unfair advantage are <span>not allowed</span> (e.g. X-Ray, Flight).</li>
+                    <li>Mods like <span>schematica</span> or <span>litematica</span> are OK, provided that you don't use the Easy Place or similar feature.</li>
+                    <li>Players are kindly requested <span>not to build massive farms</span> with many entities as this could degrade the experience.</li>
+                </ol>
+            </div>
+
+            <!-- Tools & Links -->
+            <div class="panel">
+                <h2>Tools & Links</h2>
+                <ul>
+                    <li><a href="https://bloxelizer.com/schematics" target="_blank">Schema hub</a></li>
+                    <li><a href="https://imagetopixelapp.com/" target="_blank">Pixel art generator</a></li>
+                    <li><a href="https://www.plotz.co.uk/" target="_blank">3D modeller to schema (Plotz)</a></li>
+                    <li><a href="https://www.mcworldtools.com/" target="_blank">World tools</a></li>
+                    <li><a href="https://wisehosting.com/tools" target="_blank">Other tools (Wisehosting)</a></li>
+                </ul>
+            </div>
         </div>
 
         <!-- Footer -->
-        <footer>
+        <footer style="margin-top: 40px;">
             <div style="margin-bottom: 12px;">
                 <a href="https://stimmie.dev">Portfolio</a> &nbsp;|&nbsp; 
                 <a href="https://github.com/smmariquit">GitHub</a> &nbsp;|&nbsp; 
