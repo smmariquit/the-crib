@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands Wiki | The Crib</title>
+    <meta name="description" content="Definitive list of all player commands available on The Crib Minecraft Server.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../crib.png">
+    
+    <!-- Open Graph / Embed -->
+    <meta property="og:site_name" content="The Crib">
+    <meta property="og:title" content="Commands Wiki | The Crib">
+    <meta property="og:description" content="Definitive list of all player commands available on The Crib Minecraft Server.">
+    <meta property="og:image" content="https://crib.stimmie.dev/crib-og.png">
+    <meta property="og:url" content="https://crib.stimmie.dev/wiki">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00FFFF">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent-main: #00FFFF;
+            --accent-dark: #008B8B;
+            --accent-green: #00FFAA;
+            --bg-dark: #030712;
+            --panel-bg: rgba(17, 24, 39, 0.7);
+            --panel-border: rgba(0, 255, 255, 0.15);
+            --text-main: #FFFFFF;
+            --text-muted: #CBD5E1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: radial-gradient(circle at top center, #0F172A 0%, var(--bg-dark) 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+        }
+
+        /* 3D Canvas Background */
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Navigation */
+        .header-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            border: 2px solid var(--panel-border);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .header-img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0;
+            background: linear-gradient(135deg, #00FFFF 0%, #008B8B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.2));
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Whimsical Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 139, 139, 0.2));
+            color: #FFFFFF;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 10px 24px;
+            border: 1px solid var(--accent-main);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1), inset 0 0 10px rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 139, 139, 0.4));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2), inset 0 0 15px rgba(0, 255, 255, 0.15);
+            text-decoration: none;
+        }
+
+        /* Glassmorphism Panels */
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 35px 40px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,255,0.3), transparent);
+        }
+
+        .panel h2 {
+            color: var(--text-main);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .panel h2::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 24px;
+            background: var(--accent-main);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--accent-main);
+        }
+
+        /* Commands Layout */
+        .cmd-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        
+        @media (min-width: 600px) {
+            .cmd-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .cmd-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .cmd-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
+        }
+
+        .cmd-item:hover {
+            background: rgba(0, 255, 255, 0.05);
+            border-color: var(--panel-border);
+            transform: translateY(-2px);
+        }
+
+        .cmd-item strong {
+            display: block;
+            color: var(--accent-main);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .cmd-item span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        a {
+            color: var(--accent-main);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        a:hover {
+            color: #FFFFFF;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-bottom: 40px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            margin: 0 12px;
+            font-weight: 500;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .header-nav {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+                gap: 20px;
+            }
+            .header-left {
+                flex-direction: column;
+            }
+            .back-btn {
+                width: 100%;
+            }
+            .panel {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            .panel h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div class="container">
+        <!-- Header Nav -->
+        <div class="header-nav">
+            <div class="header-left">
+                <img src="../crib.png" alt="Mr Fresh Cat" class="header-img">
+                <div class="header-text">
+                    <h1>Commands Wiki</h1>
+                    <div class="subtitle">The definitive list of commands for The Crib</div>
+                </div>
+            </div>
+            
+            <a href="../index.html" class="back-btn">
+                ← Back to Home
+            </a>
+        </div>
+
+        <!-- Teleportation -->
+        <div class="panel">
+            <h2>Teleportation & Movement</h2>
+            <div class="cmd-grid">
+                <div class="cmd-item"><strong>/spawn</strong><span>Teleport to the main server spawn.</span></div>
+                <div class="cmd-item"><strong>/back</strong><span>Return to your previous location or where you last died.</span></div>
+                <div class="cmd-item"><strong>/tpa &lt;player&gt;</strong><span>Send a request to teleport to another player.</span></div>
+                <div class="cmd-item"><strong>/tpahere &lt;player&gt;</strong><span>Send a request asking a player to teleport to you.</span></div>
+                <div class="cmd-item"><strong>/tpaccept</strong><span>Accept an incoming teleport request.</span></div>
+                <div class="cmd-item"><strong>/tpdeny</strong><span>Deny an incoming teleport request.</span></div>
+            </div>
+        </div>
+
+        <!-- Homes -->
+        <div class="panel">
+            <h2>Homes & Locations</h2>
+            <div class="cmd-grid">
+                <div class="cmd-item"><strong>/sethome &lt;name&gt;</strong><span>Save your current location as a home.</span></div>
+                <div class="cmd-item"><strong>/home &lt;name&gt;</strong><span>Teleport to one of your saved homes.</span></div>
+                <div class="cmd-item"><strong>/delhome &lt;name&gt;</strong><span>Delete a saved home location.</span></div>
+                <div class="cmd-item"><strong>/homes</strong><span>View a list of all your saved homes.</span></div>
+            </div>
+        </div>
+
+        <!-- Communication -->
+        <div class="panel">
+            <h2>Communication</h2>
+            <div class="cmd-grid">
+                <div class="cmd-item"><strong>/msg &lt;player&gt; &lt;msg&gt;</strong><span>Send a private message to a player.</span></div>
+                <div class="cmd-item"><strong>/reply &lt;msg&gt;</strong><span>Reply to the last private message you received.</span></div>
+                <div class="cmd-item"><strong>/ignore &lt;player&gt;</strong><span>Block chat messages from a specific player.</span></div>
+                <div class="cmd-item"><strong>/afk</strong><span>Mark yourself as Away From Keyboard.</span></div>
+            </div>
+        </div>
+
+        <!-- Bedrock Authentication -->
+        <div class="panel">
+            <h2>Bedrock Authentication</h2>
+            <div class="cmd-grid">
+                <div class="cmd-item"><strong>/login &lt;password&gt;</strong><span>Log in using your Java account password.</span></div>
+                <div class="cmd-item"><strong>/register &lt;pw&gt; &lt;pw&gt;</strong><span>Register a new Bedrock account link (if applicable).</span></div>
+            </div>
+        </div>
+
+        <!-- Utility & Misc -->
+        <div class="panel">
+            <h2>Utility & Miscellaneous</h2>
+            <div class="cmd-grid">
+                <div class="cmd-item"><strong>/help</strong><span>View the in-game server guide.</span></div>
+                <div class="cmd-item"><strong>/sb</strong><span>Toggle the sidebar scoreboard on or off.</span></div>
+                <div class="cmd-item"><strong>/bingoplus</strong><span>Gamble an item via the BingoPlus plugin.</span></div>
+                <div class="cmd-item"><strong>/playtime</strong><span>Check how much total time you've spent on the server.</span></div>
+                <div class="cmd-item"><strong>/ping</strong><span>Check your current connection latency to the server.</span></div>
+                <div class="cmd-item"><strong>/suicide</strong><span>Kill your character instantly.</span></div>
+                <div class="cmd-item"><strong>/ver</strong><span>Check the current server software and version running.</span></div>
+                <div class="cmd-item"><strong>Press Tab</strong><span>View the online player list and latency.</span></div>
+            </div>
+        </div>
+
+        <!-- Features & Plugins -->
+        <div class="panel">
+            <h2>Features & Plugins</h2>
+            <div class="cmd-grid">
+                <div class="cmd-item"><strong>GeyserMC & Floodgate</strong><span>Allows Bedrock edition players to seamlessly crossplay on the Java server.</span></div>
+                <div class="cmd-item"><strong>EssentialsX</strong><span>Provides the core set of commands like /home, /tpa, and /back.</span></div>
+                <div class="cmd-item"><strong>CoreProtect</strong><span>Logs every block placed and broken so griefing can be instantly rolled back.</span></div>
+                <div class="cmd-item"><strong>BingoPlus</strong><span>A fun gambling and minigame plugin to gamble items via /bingoplus.</span></div>
+                <div class="cmd-item"><strong>View Distance Tweaks</strong><span>Dynamically adjusts server view distance based on performance to keep TPS at 20.0.</span></div>
+                <div class="cmd-item"><strong>Simple Voice Chat</strong><span>(Optional) Proximity voice chat support if you have the fabric mod installed!</span></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div style="margin-bottom: 12px;">
+                <a href="https://stimmie.dev">Portfolio</a> &nbsp;|&nbsp; 
+                <a href="https://github.com/smmariquit">GitHub</a> &nbsp;|&nbsp; 
+                <a href="https://joinpizza.fun">Pizza & Friends</a>
+            </div>
+            <p>© 2026 The Crib by Stimmie. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // ----------------------------------------------------
+        // Generate Minecraft Dirt Texture Dynamically
+        // ----------------------------------------------------
+        function createDirtTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 16;
+            canvas.height = 16;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.fillStyle = '#866043';
+            ctx.fillRect(0, 0, 16, 16);
+            
+            const colors = ['#735238', '#5b3f29', '#966c4a', '#4c3321'];
+            for(let i = 0; i < 16; i++) {
+                for(let j = 0; j < 16; j++) {
+                    if(Math.random() > 0.3) {
+                        ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                        ctx.fillRect(i, j, 1, 1);
+                    }
+                }
+            }
+            return canvas.toDataURL();
+        }
+
+        const dirtDataURL = createDirtTexture();
+
+        // ----------------------------------------------------
+        // Three.js Orbiting Dirt Blocks Animation (Whimsical)
+        // ----------------------------------------------------
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); 
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        const loader = new THREE.TextureLoader();
+        const texture = loader.load(dirtDataURL);
+        texture.magFilter = THREE.NearestFilter;
+        texture.minFilter = THREE.NearestFilter;
+
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshLambertMaterial({ map: texture });
+
+        const cubes = [];
+        const numCubes = 45; 
+
+        for (let i = 0; i < numCubes; i++) {
+            const theta = Math.random() * 2 * Math.PI;
+            const phi = Math.acos((Math.random() * 2) - 1);
+
+            const cube = new THREE.Mesh(geometry, material);
+
+            cube.rotation.x = Math.random() * Math.PI;
+            cube.rotation.y = Math.random() * Math.PI;
+
+            const scale = 0.3 + Math.random() * 0.6;
+            cube.scale.set(scale, scale, scale);
+
+            cube.userData = {
+                distance: 2 + Math.random() * 7, 
+                theta: theta,
+                phi: phi,
+                orbitSpeed: (Math.random() - 0.5) * 0.008, 
+                rotSpeedX: (Math.random() - 0.5) * 0.02,
+                rotSpeedY: (Math.random() - 0.5) * 0.02
+            };
+
+            scene.add(cube);
+            cubes.push(cube);
+        }
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); 
+        scene.add(ambientLight);
+        
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+        dirLight.position.set(5, 10, 7);
+        scene.add(dirLight);
+
+        const pointLight = new THREE.PointLight(0x00FFFF, 1.5, 20);
+        pointLight.position.set(-5, -5, 5);
+        scene.add(pointLight);
+
+        camera.position.z = 10;
+
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+
+            scene.rotation.y = time * 0.05; 
+            scene.rotation.x = Math.sin(time * 0.02) * 0.1;
+
+            cubes.forEach(cube => {
+                const data = cube.userData;
+                data.theta += data.orbitSpeed;
+                
+                const r = data.distance + Math.sin(time * 2 + data.theta) * 0.2;
+                
+                cube.position.x = r * Math.sin(data.phi) * Math.cos(data.theta);
+                cube.position.y = r * Math.cos(data.phi);
+                cube.position.z = r * Math.sin(data.phi) * Math.sin(data.theta);
+
+                cube.rotation.x += data.rotSpeedX;
+                cube.rotation.y += data.rotSpeedY;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
