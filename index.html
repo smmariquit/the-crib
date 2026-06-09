@@ -3,126 +3,733 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Crib by Stimmie</title>
-    <meta name="description" content="Stimmie's survival Minecraft server that never resets! Join via mc.stimmie.dev">
+    <title>The Crib | Premium Survival Server</title>
+    <meta name="description" content="Stimmie's survival Minecraft server that never resets! Join Java & Bedrock crossplay via crib.stimmie.dev">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="crib.png">
     
     <!-- Open Graph / Embed -->
     <meta property="og:site_name" content="The Crib">
-    <meta property="og:title" content="The Crib by Stimmie">
-    <meta property="og:description" content="Stimmie's survival Minecraft server that never resets! Join via mc.stimmie.dev">
-    <meta property="og:image" content="https://crib.stimmie.dev/crib.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:title" content="The Crib | Java & Bedrock Survival">
+    <meta property="og:description" content="Stimmie's survival Minecraft server that never resets! Join via crib.stimmie.dev">
+    <meta property="og:image" content="https://crib.stimmie.dev/crib-og.png">
     <meta property="og:url" content="https://crib.stimmie.dev">
     <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00ffff">
     
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="The Crib by Stimmie">
-    <meta name="twitter:description" content="Stimmie's survival Minecraft server that never resets! Join via mc.stimmie.dev">
-    <meta name="twitter:image" content="https://crib.stimmie.dev/crib.png">
-    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Crib | Java & Bedrock Survival">
+    <meta name="twitter:description" content="Stimmie's survival Minecraft server that never resets! Join via crib.stimmie.dev">
+    <meta name="twitter:image" content="https://crib.stimmie.dev/crib-og.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-color: #05090a;
+            --surface-color: rgba(0, 255, 255, 0.03);
+            --surface-border: rgba(0, 255, 255, 0.1);
+            --surface-hover: rgba(0, 255, 255, 0.08);
+            
+            --cyan-primary: #00ffff;
+            --cyan-dark: #008b8b;
+            --cyan-glow: rgba(0, 255, 255, 0.4);
+            
+            --text-primary: #ffffff;
+            --text-secondary: #a1b0b5;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #222;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 139, 139, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 255, 255, 0.1), transparent 25%);
+            background-attachment: fixed;
         }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(5, 9, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface-border);
+            padding: 15px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff, var(--cyan-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan-primary);
+            text-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin-bottom: 24px;
+            border: 2px solid var(--cyan-primary);
+            box-shadow: 0 0 30px var(--cyan-glow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
         h1 {
-            margin-bottom: 20px;
-        }
-        p {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
             margin-bottom: 16px;
+            background: linear-gradient(to right, #fff, var(--cyan-primary), var(--cyan-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.2));
         }
-        .info {
-            margin: 30px 0;
+
+        .subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
-        .info p {
-            margin-bottom: 8px;
+
+        .copy-ip-btn {
+            background: linear-gradient(135deg, var(--cyan-dark), var(--cyan-primary));
+            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 20px -10px var(--cyan-primary);
+            position: relative;
+            overflow: hidden;
         }
-        code {
-            background: #fde8e6;
-            padding: 2px 6px;
-            border-radius: 3px;
-            color: #F24638;
+
+        .copy-ip-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
         }
-        footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            font-size: 14px;
+
+        .copy-ip-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 25px -10px var(--cyan-primary);
         }
-        a {
-            color: #F24638;
+
+        .copy-ip-btn:hover::before {
+            left: 100%;
         }
-        .logo {
-            width: 80px;
-            height: 80px;
+
+        .player-count {
+            margin-top: 24px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--cyan-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--cyan-primary);
+            animation: pulsing 2s infinite;
+        }
+
+        @keyframes pulsing {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 255, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+        }
+
+        /* Section Layouts */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .section-title span {
+            color: var(--cyan-primary);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* Cards */
+        .card {
+            padding: 32px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan-dark), var(--cyan-primary), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: var(--surface-hover);
+            border-color: rgba(0, 255, 255, 0.3);
+            box-shadow: 0 20px 40px -20px rgba(0, 255, 255, 0.15);
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--cyan-primary), var(--cyan-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .status {
-            margin: 20px 0;
-            padding: 12px;
-            border-radius: 6px;
-            background: #f5f5f5;
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #fff;
         }
-        .status-online {
-            color: #22c55e;
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
         }
-        .status-offline {
-            color: #ef4444;
+
+        /* Commands Section */
+        .cmd-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cmd-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .cmd-item:hover {
+            background: var(--surface-hover);
+        }
+
+        .cmd-code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--cyan-primary);
+            background: rgba(0, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .cmd-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* Join Guide */
+        .join-step {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--cyan-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 1px solid var(--cyan-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+
+        .step-content h3 {
+            margin-bottom: 8px;
+            color: #fff;
+            font-size: 1.3rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+        }
+
+        .code-inline {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: var(--cyan-primary);
+            font-size: 0.9em;
+        }
+
+        /* Notice Box */
+        .notice-box {
+            margin-top: 24px;
+            padding: 20px;
+            border-left: 4px solid var(--cyan-primary);
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.05), transparent);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .notice-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .notice-box strong {
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--surface-border);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            color: var(--cyan-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none; /* simple mobile nav approach for single page */
+            }
+            .cmd-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <img src="crib.png" alt="The Crib" class="logo">
-    <h1>The Crib by <a href="https://stimmie.dev">Stimmie</a></h1>
-    
-    <p>The Crib is Stimmie's survival Minecraft server that never resets! If you're looking for a place for your 2-week Minecraft phase or just a place to chat with friends over parkour, we will welcome you with open arms!</p>
-    
-    <div class="info">
-        <p><strong>Version:</strong> 1.21.x</p>
-        <p><strong>Java IP:</strong> <code>mc.stimmie.dev</code></p>
-        <p><strong>Bedrock IP:</strong> <code>mc.stimmie.dev:19132</code></p>
-        <p><strong>Map:</strong> <a href="https://map.stimmie.dev">map.stimmie.dev</a></p>
-        <p>Cracked accounts are OK!</p>
-    </div>
-    
-    <div class="status" id="server-status">
-        <strong>Server Status:</strong> <span id="status-text">Checking...</span>
-    </div>
-    
+
+    <!-- Nav -->
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <div class="logo-text">The Crib</div>
+            <ul class="nav-links">
+                <li><a href="#about">Features</a></li>
+                <li><a href="#join">How to Join</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#links">Links</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <img src="crib.png" alt="Mr Fresh Cat Icon" class="hero-img">
+            <h1>The Crib</h1>
+            <p class="subtitle">Java & Bedrock 1.21.x</p>
+            
+            <button class="copy-ip-btn" id="copyBtn" onclick="copyIP()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span id="copyText">crib.stimmie.dev</span>
+            </button>
+
+            <div class="player-count">
+                <div class="pulse"></div>
+                <span id="status-text">Pinging server...</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="about" class="container reveal">
+        <div class="section-header">
+            <h2 class="section-title">Server <span>Specs</span></h2>
+            <p style="color: var(--text-secondary);">Premium performance for a seamless survival experience.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="card glass">
+                <div class="card-icon">⚡</div>
+                <h3>High Performance</h3>
+                <p>Hosted in NY on DigitalOcean. Powered by Intel Premium (2 vCPU) and 8GB RAM. Highly optimized with dynamic View Distance Tweaks.</p>
+            </div>
+            <div class="card glass">
+                <div class="card-icon">🌍</div>
+                <h3>Massive World</h3>
+                <p>Explore without limits. Featuring massive 30,000,000 block borders for the Overworld, Nether, and the End dimensions.</p>
+            </div>
+            <div class="card glass">
+                <div class="card-icon">🏆</div>
+                <h3>Leaderboards</h3>
+                <p>Show off your skills. We feature a competitive Battlepass system with live rankings to reward our most dedicated players.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Join (Crossplay Guide) -->
+    <section id="join" class="container reveal">
+        <div class="section-header">
+            <h2 class="section-title">Crossplay <span>Guide</span></h2>
+            <p style="color: var(--text-secondary);">Java and Bedrock players share the exact same server and inventory.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="glass" style="padding: 40px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 30px; color: #fff;">Bedrock Instructions</h3>
+                
+                <div class="join-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Match Your Name</h3>
+                        <p>Change your Bedrock username to exactly match your Java Name. This ensures inventories sync perfectly.</p>
+                    </div>
+                </div>
+                
+                <div class="join-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Join the Server</h3>
+                        <p>Add <span class="code-inline">crib.stimmie.dev</span> with default port <span class="code-inline">19132</span> to your server list and connect.</p>
+                    </div>
+                </div>
+
+                <div class="join-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Authenticate</h3>
+                        <p>Type <span class="code-inline">/login &lt;password&gt;</span> in chat using your Java password to verify your identity.</p>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <p><strong>Security Note:</strong> Login sessions are securely saved for <strong>6 hours</strong>, meaning you don't have to log in every single time you disconnect!</p>
+                </div>
+            </div>
+
+            <div class="glass" style="padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 24px; filter: drop-shadow(0 0 10px rgba(0,255,255,0.4));"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                <h3 style="font-size: 1.8rem; margin-bottom: 16px; color: #fff;">Java Edition</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1.1rem;">Just type the IP into your multiplayer menu and join. No extra steps needed!</p>
+                <div class="code-inline" style="font-size: 1.2rem; padding: 12px 24px;">crib.stimmie.dev</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Commands Reference -->
+    <section id="commands" class="container reveal">
+        <div class="section-header">
+            <h2 class="section-title">Quick <span>Commands</span></h2>
+            <p style="color: var(--text-secondary);">Essential commands for navigating and surviving The Crib.</p>
+        </div>
+
+        <div class="glass cmd-list" style="padding: 20px; max-width: 800px; margin: 0 auto;">
+            <div class="cmd-item">
+                <span class="cmd-code">/spawn</span>
+                <span class="cmd-desc">Return instantly to the server hub</span>
+            </div>
+            <div class="cmd-item">
+                <span class="cmd-code">/sethome &lt;name&gt;</span>
+                <span class="cmd-desc">Set a teleport location for your base</span>
+            </div>
+            <div class="cmd-item">
+                <span class="cmd-code">/tpa &lt;player&gt;</span>
+                <span class="cmd-desc">Request to teleport to another player</span>
+            </div>
+            <div class="cmd-item">
+                <span class="cmd-code">/claim</span>
+                <span class="cmd-desc">Protect your builds from griefing</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Links Section -->
+    <section id="links" class="container reveal" style="padding-bottom: 60px;">
+        <div class="section-header">
+            <h2 class="section-title">Important <span>Links</span></h2>
+        </div>
+
+        <div class="grid-2">
+            <a href="https://map.stimmie.dev" target="_blank" style="text-decoration: none;">
+                <div class="card glass" style="display: flex; align-items: center; gap: 20px;">
+                    <div style="font-size: 2rem;">🗺️</div>
+                    <div>
+                        <h3 style="margin-bottom: 4px;">Live 3D Web Map</h3>
+                        <p style="color: var(--cyan-primary);">map.stimmie.dev ↗</p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="http://mc.stimmie.dev:8804" target="_blank" style="text-decoration: none;">
+                <div class="card glass" style="display: flex; align-items: center; gap: 20px;">
+                    <div style="font-size: 2rem;">📈</div>
+                    <div>
+                        <h3 style="margin-bottom: 4px;">Server Analytics</h3>
+                        <p style="color: var(--cyan-primary);">Plan Dashboard ↗</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>Affiliated with <a href="https://joinpizza.fun">Pizza and Friends</a></p>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://stimmie.dev">Portfolio</a>
+                <a href="https://github.com/smmariquit">GitHub</a>
+                <a href="https://joinpizza.fun">Pizza and Friends</a>
+            </div>
+            <p class="footer-text">© 2026 The Crib by Stimmie. All rights reserved.</p>
+        </div>
     </footer>
-    
+
+    <!-- Scripts -->
     <script>
+        // Navbar Scrolled State
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Copy IP Functionality
+        function copyIP() {
+            const ip = "crib.stimmie.dev";
+            navigator.clipboard.writeText(ip).then(() => {
+                const copyText = document.getElementById('copyText');
+                const btn = document.getElementById('copyBtn');
+                
+                copyText.innerText = "IP Copied!";
+                btn.style.background = "linear-gradient(135deg, #00ffff, #fff)";
+                btn.style.color = "#000";
+                
+                setTimeout(() => {
+                    copyText.innerText = "crib.stimmie.dev";
+                    btn.style.background = "";
+                    btn.style.color = "";
+                }, 2000);
+            });
+        }
+
+        // Scroll Reveal Animations
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+
+        // Check Server Status dynamically
         async function checkServerStatus() {
             const statusText = document.getElementById('status-text');
             try {
+                // Using mc.stimmie.dev since that was the original API check endpoint
                 const response = await fetch('https://mcapi.us/server/status?ip=mc.stimmie.dev');
                 const data = await response.json();
                 
                 if (data.online) {
                     const players = data.players?.now ?? 0;
                     const maxPlayers = data.players?.max ?? '?';
-                    statusText.innerHTML = `<span class="status-online">● Online</span> — ${players}/${maxPlayers} players`;
+                    statusText.innerHTML = `<strong style="color: #00ffff;">${players}</strong> / ${maxPlayers} players online`;
+                    
+                    // Update meta tags dynamically for sharing instances that support it
+                    const descText = `Stimmie's survival Minecraft server that never resets! Join ${players} players currently online via crib.stimmie.dev`;
+                    const metaDesc = document.querySelector('meta[name="description"]');
+                    const ogDesc = document.querySelector('meta[property="og:description"]');
+                    const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+                    if (metaDesc) metaDesc.setAttribute('content', descText);
+                    if (ogDesc) ogDesc.setAttribute('content', descText);
+                    if (twitterDesc) twitterDesc.setAttribute('content', descText);
                 } else {
-                    statusText.innerHTML = '<span class="status-offline">● Offline</span>';
+                    statusText.innerHTML = '<span style="color: #ff4444;">Server Offline</span>';
                 }
             } catch (error) {
-                statusText.innerHTML = '<span class="status-offline">● Unable to check</span>';
+                statusText.innerHTML = 'Unable to fetch status';
             }
         }
         
