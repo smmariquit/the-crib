@@ -27,19 +27,19 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --mc-yellow: #FFFF55;
-            --mc-green: #55FF55;
-            --mc-red: #FF5555;
-            --mc-aqua: #55FFFF;
-            --mc-gold: #FFAA00;
-            --text-main: #E2E8F0;
-            --text-muted: #94A3B8;
-            --panel-bg: rgba(20, 24, 30, 0.85);
-            --panel-border: rgba(255, 255, 255, 0.1);
+            --mc-yellow: #00FFFF; /* Vibrant Cyan */
+            --mc-green: #00FFAA; /* Neon Green */
+            --mc-red: #FF3366;
+            --mc-aqua: #00FFFF;
+            --mc-gold: #008B8B; /* Dark Cyan */
+            --text-main: #F8FAFC;
+            --text-muted: #A8B8D0;
+            --panel-bg: rgba(6, 8, 12, 0.85); /* Slick Obsidian Dark */
+            --panel-border: rgba(0, 255, 255, 0.15); /* Cyan glow border */
         }
 
         * {
@@ -49,11 +49,12 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'DotGothic16', sans-serif;
             color: var(--text-main);
             line-height: 1.7;
             overflow-x: hidden;
-            background-color: #050505;
+            background-color: #030406;
+            font-size: 1.2rem; /* DotGothic reads better slightly larger */
         }
 
         h1, h2, h3, .mc-font {
@@ -112,34 +113,32 @@
             border: 2px solid var(--panel-border);
         }
 
-        /* Refined Button */
+        /* Refined Slick Button */
         .mc-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: #2F855A;
-            color: #FFFFFF;
-            font-size: 1.1rem;
+            background-color: rgba(0, 139, 139, 0.2); /* Translucent Dark Cyan */
+            color: var(--mc-yellow);
+            font-size: 1.2rem;
             font-weight: 600;
             padding: 14px 32px;
             text-decoration: none;
-            border: none;
+            border: 1px solid var(--mc-yellow);
             border-radius: 6px;
-            border-bottom: 4px solid #1C4532;
             cursor: pointer;
             margin: 10px auto 20px auto;
-            transition: transform 0.1s, background-color 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.2s;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
         }
         
         .mc-btn:active {
-            transform: translateY(4px);
-            border-bottom: 0px solid #1C4532;
-            margin-bottom: 24px; /* compensate for transform */
+            transform: translateY(2px);
         }
 
         .mc-btn:hover {
-            background-color: #38A169;
+            background-color: rgba(0, 255, 255, 0.15);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
         }
 
         .center-wrap {
@@ -166,7 +165,7 @@
             border-radius: 12px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.05); /* Very subtle cyan glow */
             padding: 40px;
             margin-bottom: 30px;
             position: relative;
@@ -240,15 +239,16 @@
         }
 
         .cmd-item {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 255, 255, 0.03); /* Cyan tint */
             padding: 16px;
             border-radius: 8px;
             border: 1px solid var(--panel-border);
-            transition: background 0.2s;
+            transition: background 0.2s, box-shadow 0.2s;
         }
 
         .cmd-item:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
         }
 
         .cmd-item strong {
@@ -329,6 +329,18 @@
             <div class="code-block mc-font" style="font-size: 1.2rem; background: transparent; border: none; color: var(--text-muted);" id="ipDisplay">crib.stimmie.dev</div>
 
             <div class="player-count" id="status-text">Pinging server...</div>
+        </div>
+
+        <!-- Tools & Links -->
+        <div class="mc-panel">
+            <h2>Tools & Links</h2>
+            <ul>
+                <li><a href="https://bloxelizer.com/schematics" target="_blank">Schema hub</a></li>
+                <li><a href="https://imagetopixelapp.com/" target="_blank">Pixel art generator</a></li>
+                <li><a href="https://www.plotz.co.uk/" target="_blank">3D modeller to schema (Plotz)</a></li>
+                <li><a href="https://www.mcworldtools.com/" target="_blank">World tools</a></li>
+                <li><a href="https://wisehosting.com/tools" target="_blank">Other tools (Wisehosting)</a></li>
+            </ul>
         </div>
 
         <!-- How to Join -->
@@ -412,17 +424,6 @@
             </ol>
         </div>
 
-        <!-- Tools & Links -->
-        <div class="mc-panel">
-            <h2>Tools & Links</h2>
-            <ul>
-                <li><a href="https://bloxelizer.com/schematics" target="_blank">Schema hub</a></li>
-                <li><a href="https://imagetopixelapp.com/" target="_blank">Pixel art generator</a></li>
-                <li><a href="https://www.plotz.co.uk/" target="_blank">3D modeller to schema (Plotz)</a></li>
-                <li><a href="https://www.mcworldtools.com/" target="_blank">World tools</a></li>
-                <li><a href="https://wisehosting.com/tools" target="_blank">Other tools (Wisehosting)</a></li>
-            </ul>
-        </div>
 
         <!-- Footer -->
         <footer>
@@ -565,10 +566,12 @@
             navigator.clipboard.writeText(ip).then(() => {
                 const btn = document.getElementById('copyBtn');
                 btn.innerText = "Copied to Clipboard!";
-                btn.style.backgroundColor = "#276749"; // Darker green on success
+                btn.style.color = "var(--mc-green)";
+                btn.style.borderColor = "var(--mc-green)";
                 setTimeout(() => {
                     btn.innerText = "Click to Copy IP";
-                    btn.style.backgroundColor = "#2F855A";
+                    btn.style.color = "var(--mc-yellow)";
+                    btn.style.borderColor = "var(--mc-yellow)";
                 }, 2000);
             });
         }
