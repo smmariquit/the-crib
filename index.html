@@ -481,6 +481,9 @@
 </head>
 <body>
 
+    <!-- Three.js Canvas Container -->
+    <div id="canvas-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; opacity: 0.8;"></div>
+
     <!-- Nav -->
     <nav id="navbar">
         <div class="container nav-inner">
@@ -735,6 +738,150 @@
         
         checkServerStatus();
         setInterval(checkServerStatus, 60000);
+    </script>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Three.js Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // optimize performance
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Minecraft Block Geometry
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        
+        // Premium Glassy Material
+        const material = new THREE.MeshPhysicalMaterial({
+            color: 0x001111,
+            emissive: 0x000505,
+            metalness: 0.8,
+            roughness: 0.2,
+            transmission: 0.8, // glass-like
+            transparent: true,
+            opacity: 0.9
+        });
+        
+        // Cyan Wireframe
+        const wireframeMaterial = new THREE.LineBasicMaterial({ 
+            color: 0x00ffff, 
+            transparent: true, 
+            opacity: 0.3 
+        });
+
+        const cubes = [];
+        const numCubes = 80; // Optimized amount
+
+        for (let i = 0; i < numCubes; i++) {
+            // Spawn cubes clustered near the center
+            const distance = Math.random() * 2.5;
+            const theta = Math.random() * 2 * Math.PI;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            
+            const x = distance * Math.sin(phi) * Math.cos(theta);
+            const y = distance * Math.sin(phi) * Math.sin(theta);
+            const z = distance * Math.cos(phi);
+
+            // Calculate explosion trajectory (outward from center)
+            const trajX = (x === 0) ? (Math.random() - 0.5) : x;
+            const trajY = (y === 0) ? (Math.random() - 0.5) : y;
+            const trajZ = (z === 0) ? (Math.random() - 0.5) : z;
+            
+            // Normalize trajectory
+            const len = Math.sqrt(trajX*trajX + trajY*trajY + trajZ*trajZ);
+
+            const cube = new THREE.Mesh(geometry, material);
+            
+            // Add wireframe to look like Minecraft block edges
+            const edges = new THREE.EdgesGeometry(geometry);
+            const line = new THREE.LineSegments(edges, wireframeMaterial);
+            cube.add(line);
+
+            // Random initial rotations
+            cube.rotation.x = Math.random() * Math.PI;
+            cube.rotation.y = Math.random() * Math.PI;
+
+            // Random block scale variations
+            const scale = 0.15 + Math.random() * 0.6;
+            cube.scale.set(scale, scale, scale);
+
+            cube.userData = {
+                baseX: x, baseY: y, baseZ: z,
+                trajX: (trajX/len) * (0.8 + Math.random() * 1.5), 
+                trajY: (trajY/len) * (0.8 + Math.random() * 1.5), 
+                trajZ: (trajZ/len) * (0.8 + Math.random() * 1.5),
+                rotSpeedX: (Math.random() - 0.5) * 0.02,
+                rotSpeedY: (Math.random() - 0.5) * 0.02
+            };
+
+            scene.add(cube);
+            cubes.push(cube);
+        }
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0x00ffff, 2, 50);
+        pointLight.position.set(0, 0, 5);
+        scene.add(pointLight);
+
+        const pointLight2 = new THREE.PointLight(0x008b8b, 2, 50);
+        pointLight2.position.set(0, 5, -5);
+        scene.add(pointLight2);
+
+        camera.position.z = 8;
+
+        // Scroll state
+        let currentScroll = 0;
+        window.addEventListener('scroll', () => {
+            currentScroll = window.scrollY;
+        });
+
+        // Animation Loop
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.005;
+
+            // Explosion factor tied to scroll (smooth exponential effect)
+            const scrollFactor = Math.pow(currentScroll * 0.006, 1.15);
+
+            // Gently rotate the entire cluster
+            scene.rotation.y = time * 0.3;
+            scene.rotation.x = time * 0.15;
+
+            cubes.forEach(cube => {
+                const data = cube.userData;
+                
+                // Continuous floating motion
+                const floatOffsetX = Math.sin(time * 3 + data.baseX) * 0.3;
+                const floatOffsetY = Math.cos(time * 3 + data.baseY) * 0.3;
+                
+                // Final position: base + explosion + float
+                cube.position.x = data.baseX + (data.trajX * scrollFactor) + floatOffsetX;
+                cube.position.y = data.baseY + (data.trajY * scrollFactor) + floatOffsetY;
+                cube.position.z = data.baseZ + (data.trajZ * scrollFactor);
+
+                cube.rotation.x += data.rotSpeedX;
+                cube.rotation.y += data.rotSpeedY;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Start animation
+        animate();
     </script>
 </body>
 </html>
