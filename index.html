@@ -31,14 +31,14 @@
 
     <style>
         :root {
-            --accent-main: #00FFFF;
-            --accent-dark: #008B8B;
-            --accent-green: #00FFAA;
+            --accent-main: #3B82F6;
+            --accent-dark: #2563EB;
+            --accent-green: #10B981;
             --bg-dark: #030712;
-            --panel-bg: #0F172A; /* Solid Slate 900 */
-            --panel-border: rgba(0, 255, 255, 0.15);
-            --text-main: #FFFFFF; /* Pure white for max contrast */
-            --text-muted: #CBD5E1; /* Slate 300 - much brighter than before for WCAG AA/AAA */
+            --panel-bg: rgba(15, 23, 42, 0.95); /* Nearly solid slate over the dirt */
+            --panel-border: #1E293B;
+            --text-main: #FFFFFF;
+            --text-muted: #CBD5E1;
         }
 
         * {
@@ -52,23 +52,22 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
-            background: radial-gradient(circle at top center, #0F172A 0%, var(--bg-dark) 100%);
+            background-color: #3b2b1f; /* Base dirt color fallback */
             min-height: 100vh;
+        }
+
+        /* Dark overlay over the repeating dirt */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
         }
 
         h1, h2, h3, .brand-font {
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-        }
-
-        /* 3D Canvas Background */
-        #canvas-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.8; /* Let the blocks pop */
         }
 
         .container {
@@ -90,7 +89,7 @@
             border-radius: 20px;
             padding: 20px 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .hero-left {
@@ -104,7 +103,7 @@
             height: 70px;
             border-radius: 16px;
             border: 2px solid var(--panel-border);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: transform 0.3s;
         }
 
@@ -120,11 +119,10 @@
         h1 {
             font-size: 2.2rem;
             margin-bottom: 0;
-            background: linear-gradient(135deg, #00FFFF 0%, #008B8B 100%);
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
-            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.2));
             line-height: 1.1;
         }
 
@@ -141,13 +139,13 @@
             gap: 10px;
         }
 
-        /* Whimsical Glow Button */
+        /* Clean Standard Button */
         .copy-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 139, 139, 0.3));
-            color: #FFFFFF; /* Pure white text for WCAG compliance on tinted background */
+            background: #2563EB;
+            color: #FFFFFF;
             font-family: 'Outfit', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
@@ -156,26 +154,23 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.15), inset 0 0 15px rgba(0, 255, 255, 0.1);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* extra pop */
         }
         
         .copy-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(0, 139, 139, 0.5));
+            background: #1D4ED8;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.2);
         }
         
         .copy-btn:active {
             transform: translateY(1px);
         }
 
-        /* Discord Glow Button */
+        /* Discord Clean Button */
         .discord-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(88, 101, 242, 0.2), rgba(64, 78, 237, 0.4));
+            background: #5865F2;
             color: #FFFFFF;
             font-family: 'Outfit', sans-serif;
             font-size: 1.1rem;
@@ -185,15 +180,12 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(88, 101, 242, 0.15), inset 0 0 15px rgba(88, 101, 242, 0.1);
             text-decoration: none !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
         
         .discord-btn:hover {
-            background: linear-gradient(135deg, rgba(88, 101, 242, 0.3), rgba(64, 78, 237, 0.6));
+            background: #4752C4;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.3), inset 0 0 20px rgba(88, 101, 242, 0.2);
             color: #FFFFFF;
         }
 
@@ -224,23 +216,22 @@
             background-color: var(--panel-bg);
             border: 1px solid var(--panel-border);
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             padding: 35px 40px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .panel:hover {
             transform: translateY(-2px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .panel::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
         }
 
         .panel h2 {
@@ -259,7 +250,6 @@
             height: 24px;
             background: var(--accent-main);
             border-radius: 4px;
-            box-shadow: 0 0 10px var(--accent-main);
         }
 
         .panel h3 {
@@ -339,7 +329,7 @@
         }
 
         .cmd-item:hover {
-            background: rgba(0, 255, 255, 0.05);
+            background: rgba(59, 130, 246, 0.05);
             border-color: var(--panel-border);
             transform: translateY(-2px);
         }
@@ -368,12 +358,11 @@
         
         a:hover {
             color: #FFFFFF;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .info-box {
-            background: rgba(0, 255, 170, 0.05);
-            border: 1px solid rgba(0, 255, 170, 0.2);
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
             padding: 16px 20px;
             border-radius: 12px;
             margin-top: 24px;
@@ -435,8 +424,6 @@
     </style>
 </head>
 <body>
-
-    <div id="canvas-container"></div>
 
     <div class="container">
         <!-- Subtle Hero Bar -->
@@ -568,130 +555,34 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         // ----------------------------------------------------
-        // Generate Minecraft Dirt Texture Dynamically
+        // Generate Minecraft Dirt Texture Dynamically for Background
         // ----------------------------------------------------
-        function createDirtTexture() {
+        function applyDirtBackground() {
             const canvas = document.createElement('canvas');
-            canvas.width = 16;
-            canvas.height = 16;
+            canvas.width = 64; 
+            canvas.height = 64;
             const ctx = canvas.getContext('2d');
             
             ctx.fillStyle = '#866043';
-            ctx.fillRect(0, 0, 16, 16);
+            ctx.fillRect(0, 0, 64, 64);
             
             const colors = ['#735238', '#5b3f29', '#966c4a', '#4c3321'];
             for(let i = 0; i < 16; i++) {
                 for(let j = 0; j < 16; j++) {
                     if(Math.random() > 0.3) {
                         ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-                        ctx.fillRect(i, j, 1, 1);
+                        ctx.fillRect(i * 4, j * 4, 4, 4);
                     }
                 }
             }
-            return canvas.toDataURL();
+            
+            document.body.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+            document.body.style.backgroundRepeat = 'repeat';
+            document.body.style.backgroundAttachment = 'fixed';
         }
-
-        const dirtDataURL = createDirtTexture();
-
-        // ----------------------------------------------------
-        // Three.js Orbiting Dirt Blocks Animation (Whimsical)
-        // ----------------------------------------------------
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // Enable antialiasing for whimsical smooth look
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        const loader = new THREE.TextureLoader();
-        const texture = loader.load(dirtDataURL);
-        // We keep NearestFilter so the blocks themselves look like pixel art Minecraft blocks, providing the whimsy!
-        texture.magFilter = THREE.NearestFilter;
-        texture.minFilter = THREE.NearestFilter;
-
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshLambertMaterial({ map: texture });
-
-        const cubes = [];
-        const numCubes = 45; // Just enough for whimsy
-
-        for (let i = 0; i < numCubes; i++) {
-            const theta = Math.random() * 2 * Math.PI;
-            const phi = Math.acos((Math.random() * 2) - 1);
-
-            const cube = new THREE.Mesh(geometry, material);
-
-            cube.rotation.x = Math.random() * Math.PI;
-            cube.rotation.y = Math.random() * Math.PI;
-
-            const scale = 0.3 + Math.random() * 0.6;
-            cube.scale.set(scale, scale, scale);
-
-            cube.userData = {
-                distance: 2 + Math.random() * 7, 
-                theta: theta,
-                phi: phi,
-                orbitSpeed: (Math.random() - 0.5) * 0.008, 
-                rotSpeedX: (Math.random() - 0.5) * 0.02,
-                rotSpeedY: (Math.random() - 0.5) * 0.02
-            };
-
-            scene.add(cube);
-            cubes.push(cube);
-        }
-
-        // Whimsical glowing lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); 
-        scene.add(ambientLight);
-        
-        // Main light
-        const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
-        dirLight.position.set(5, 10, 7);
-        scene.add(dirLight);
-
-        // Cyan rim light for a magical/whimsical vibe on the dirt blocks
-        const pointLight = new THREE.PointLight(0x00FFFF, 1.5, 20);
-        pointLight.position.set(-5, -5, 5);
-        scene.add(pointLight);
-
-        camera.position.z = 10;
-
-        let time = 0;
-        function animate() {
-            requestAnimationFrame(animate);
-            time += 0.01;
-
-            scene.rotation.y = time * 0.05; 
-            scene.rotation.x = Math.sin(time * 0.02) * 0.1;
-
-            cubes.forEach(cube => {
-                const data = cube.userData;
-                data.theta += data.orbitSpeed;
-                
-                // Add a subtle whimsical bounce to the distance
-                const r = data.distance + Math.sin(time * 2 + data.theta) * 0.2;
-                
-                cube.position.x = r * Math.sin(data.phi) * Math.cos(data.theta);
-                cube.position.y = r * Math.cos(data.phi);
-                cube.position.z = r * Math.sin(data.phi) * Math.sin(data.theta);
-
-                cube.rotation.x += data.rotSpeedX;
-                cube.rotation.y += data.rotSpeedY;
-            });
-
-            renderer.render(scene, camera);
-        }
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        animate();
+        applyDirtBackground();
 
         // ----------------------------------------------------
         // UI Logic
@@ -701,12 +592,12 @@
             navigator.clipboard.writeText(ip).then(() => {
                 const btn = document.getElementById('copyBtn');
                 btn.innerText = "Copied to Clipboard!";
-                btn.style.background = "linear-gradient(135deg, rgba(0, 255, 170, 0.2), rgba(0, 150, 100, 0.4))";
+                btn.style.background = "#10B981";
                 btn.style.color = "#FFFFFF";
                 btn.style.borderColor = "var(--accent-green)";
                 setTimeout(() => {
                     btn.innerText = "Copy IP: crib.stimmie.dev";
-                    btn.style.background = "linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 139, 139, 0.3))";
+                    btn.style.background = "#2563EB";
                     btn.style.color = "#FFFFFF";
                     btn.style.borderColor = "var(--accent-main)";
                 }, 2000);
