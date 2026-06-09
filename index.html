@@ -35,7 +35,7 @@
             --accent-dark: #008B8B;
             --accent-green: #00FFAA;
             --bg-dark: #030712;
-            --panel-bg: rgba(17, 24, 39, 0.7);
+            --panel-bg: #0F172A; /* Solid Slate 900 */
             --panel-border: rgba(0, 255, 255, 0.15);
             --text-main: #FFFFFF; /* Pure white for max contrast */
             --text-muted: #CBD5E1; /* Slate 300 - much brighter than before for WCAG AA/AAA */
@@ -88,11 +88,9 @@
             background-color: var(--panel-bg);
             border: 1px solid var(--panel-border);
             border-radius: 20px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             padding: 20px 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .hero-left {
@@ -159,7 +157,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.15), inset 0 0 15px rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
             text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* extra pop */
         }
         
@@ -189,7 +186,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px rgba(88, 101, 242, 0.15), inset 0 0 15px rgba(88, 101, 242, 0.1);
-            backdrop-filter: blur(5px);
             text-decoration: none !important;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
@@ -210,11 +206,10 @@
         .player-count {
             font-size: 0.95rem;
             color: var(--text-muted);
-            background: rgba(0,0,0,0.4);
+            background: #000000;
             padding: 6px 16px;
             border-radius: 30px;
             border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
         }
 
         /* Content Grid Layout */
@@ -224,14 +219,12 @@
             gap: 30px;
         }
 
-        /* Glassmorphism Panels */
+        /* Clean Solid Panels */
         .panel {
             background-color: var(--panel-bg);
             border: 1px solid var(--panel-border);
             border-radius: 24px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             padding: 35px 40px;
             position: relative;
             overflow: hidden;
