@@ -24,10 +24,9 @@
     <meta name="twitter:description" content="Stimmie's survival Minecraft server that never resets! Join via crib.stimmie.dev">
     <meta name="twitter:image" content="https://crib.stimmie.dev/crib-og.png">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=VT323&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -49,12 +48,14 @@
         }
 
         body {
-            font-family: 'DotGothic16', sans-serif;
+            font-family: 'VT323', monospace;
             color: var(--text-main);
-            line-height: 1.7;
+            line-height: 1.5;
             overflow-x: hidden;
             background-color: #030406;
-            font-size: 1.2rem; /* DotGothic reads better slightly larger */
+            font-size: 1.45rem; /* VT323 is smaller by default, so we bump it up */
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.9); /* Adds extra thickness */
         }
 
         h1, h2, h3, .mc-font {
