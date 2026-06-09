@@ -37,7 +37,7 @@
             --mc-aqua: #55FFFF;
             --mc-gold: #FFAA00;
             --mc-gray: #AAAAAA;
-            --mc-text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+            --mc-text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.9);
             --mc-btn-bg: #8B8B8B;
             --mc-btn-border-light: #FFFFFF;
             --mc-btn-border-dark: #373737;
@@ -52,15 +52,13 @@
 
         body {
             font-family: 'Pixelify Sans', sans-serif;
-            color: #FFFFFF;
+            color: #E0E0E0;
             line-height: 1.6;
             overflow-x: hidden;
             text-shadow: var(--mc-text-shadow);
-            /* Body background will be set to dirt by JS */
             background-color: #000;
         }
 
-        /* Overlay to darken dirt background so text is readable */
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -107,7 +105,6 @@
             box-shadow: 0 0 0 4px #555;
         }
 
-        /* Minecraft Button */
         .mc-btn {
             display: inline-flex;
             align-items: center;
@@ -126,6 +123,7 @@
             cursor: pointer;
             box-shadow: inset -2px -2px 0px rgba(0,0,0,0.25);
             margin: 20px auto;
+            text-shadow: var(--mc-text-shadow);
         }
         
         .mc-btn:active {
@@ -138,7 +136,7 @@
 
         .mc-btn:hover {
             border-color: var(--mc-btn-border-hover);
-            background-color: #7E94E5; /* Light blue highlight like MC UI hover */
+            background-color: #7E94E5;
             outline: 2px solid #000;
         }
 
@@ -150,14 +148,13 @@
         }
 
         .player-count {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--mc-gray);
             margin-top: 10px;
         }
 
-        /* Minecraft Panel */
         .mc-panel {
-            background-color: rgba(0, 0, 0, 0.75);
+            background-color: rgba(0, 0, 0, 0.85);
             border: 4px solid #000;
             box-shadow: inset 0 0 0 4px #373737;
             padding: 30px;
@@ -171,18 +168,21 @@
             margin-bottom: 20px;
             border-bottom: 2px dashed #555;
             padding-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         .mc-panel h3 {
             color: var(--mc-aqua);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            margin-top: 20px;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            letter-spacing: 1px;
         }
 
         .mc-panel p, .mc-panel li {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
         }
 
         .mc-panel ul {
@@ -195,6 +195,11 @@
             color: #FFFFFF;
         }
 
+        .no-bullets {
+            list-style-type: none !important;
+            padding-left: 0 !important;
+        }
+
         .code-block {
             display: inline-block;
             background: #000;
@@ -202,6 +207,7 @@
             padding: 4px 10px;
             border: 2px solid #555;
             margin: 5px 0;
+            letter-spacing: 1px;
         }
 
         .cmd-grid {
@@ -225,16 +231,17 @@
         .cmd-item strong {
             display: block;
             color: var(--mc-yellow);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 5px;
+            letter-spacing: 1px;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             margin-top: 50px;
             padding-bottom: 30px;
             color: var(--mc-gray);
+            font-size: 1.1rem;
         }
 
         footer a {
@@ -270,63 +277,92 @@
 
         <!-- How to Join -->
         <div class="mc-panel">
-            <h2>How to Join (Crossplay Guide)</h2>
-            <p>Java and Bedrock players share the exact same server and inventory!</p>
+            <h2>How to Join</h2>
+            <p style="margin-bottom: 20px;">Java and Bedrock players share the exact same server and inventory!</p>
             
-            <h3>Bedrock Players:</h3>
+            <h3>Java Edition (PC/Mac):</h3>
+            <ul>
+                <li>Add the IP <span class="code-block">crib.stimmie.dev</span> to your server list and join.</li>
+                <li><strong>Official:</strong> <a href="https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc" target="_blank" style="color: var(--mc-aqua);">Buy Minecraft for $30</a></li>
+                <li><strong>Alternative:</strong> You can install <span>skLauncher</span> to play for free (cracked accounts are supported).</li>
+            </ul>
+
+            <h3>Bedrock Edition (Mobile/Console):</h3>
             <ul>
                 <li>Change your Bedrock username to <span>exactly match your Java Name</span>.</li>
                 <li>Join the server at <span class="code-block">crib.stimmie.dev</span> (Port: 19132).</li>
                 <li>Type <span class="code-block">/login &lt;password&gt;</span> using your Java password in chat.</li>
+                <li><strong>Android:</strong> You can buy the game for ~50 pesos on the Play Store.</li>
             </ul>
             <p style="color: var(--mc-green); margin-top: 15px;">Note: Login sessions are securely saved for 6 hours!</p>
-
-            <h3>Java Players:</h3>
-            <ul>
-                <li>Just add the IP to your server list and join normally.</li>
-            </ul>
         </div>
 
-        <!-- Server Features -->
+        <!-- Server Info & Details -->
         <div class="mc-panel">
-            <h2>Server Features & Specs</h2>
+            <h2>Server Information</h2>
+            <ul class="no-bullets" style="margin-bottom: 25px;">
+                <li><span>Compatibility:</span> Java and Bedrock</li>
+                <li><span>Uptime:</span> 24/7</li>
+                <li><span>Physical Location:</span> Singapore</li>
+                <li><span>World Map:</span> [Feature under maintenance]</li>
+                <li><span>Game Rules:</span> PvP on, Keep inventory off</li>
+                <li><span>Difficulty:</span> Hard on all worlds</li>
+            </ul>
+
+            <h3>Worlds (Borders)</h3>
+            <ul style="margin-bottom: 25px;">
+                <li><span>Overworld:</span> 20,000 x 20,000 centered at (0,0)</li>
+                <li><span>Nether:</span> 20,000 x 20,000 centered at (0,0)</li>
+                <li><span>End:</span> 20,000 x 20,000 centered at (0,0)</li>
+            </ul>
+
+            <h3>Technical Details</h3>
             <ul>
-                <li><span>Hardware:</span> Intel Premium (2 vCPU), 8GB RAM, Hosted in NY (DigitalOcean).</li>
-                <li><span>World:</span> Massive 30,000,000 block borders for the Overworld, Nether, and End.</li>
-                <li><span>Performance:</span> Highly optimized with dynamic View Distance Tweaks.</li>
-                <li><span>Leaderboards:</span> Competitive Battlepass system with live rankings.</li>
+                <li><span>Specs:</span> 2 Cores Shared vCPUs, 8GB RAM, ~140GB Disk</li>
+                <li><span>Simulation Distance:</span> 5 chunks</li>
+                <li><span>View Distance:</span> 8 chunks (soon to be controlled via View Distance Tweaks)</li>
+                <li>Exploits like TNT duplicators are <span>patched</span></li>
+                <li><span>Server software:</span> Paper (type <span class="code-block">/ver</span> in-game)</li>
+                <li>The server is paid for roughly until the <span>1st week of September</span>.</li>
             </ul>
         </div>
 
         <!-- Commands -->
         <div class="mc-panel">
-            <h2>Quick Commands</h2>
+            <h2>Basic Commands</h2>
             <div class="cmd-grid">
-                <div class="cmd-item">
-                    <strong>/spawn</strong>
-                    <span style="color: var(--mc-gray);">Return to the hub</span>
-                </div>
-                <div class="cmd-item">
-                    <strong>/sethome &lt;name&gt;</strong>
-                    <span style="color: var(--mc-gray);">Set a home</span>
-                </div>
-                <div class="cmd-item">
-                    <strong>/tpa &lt;player&gt;</strong>
-                    <span style="color: var(--mc-gray);">Request teleport</span>
-                </div>
-                <div class="cmd-item">
-                    <strong>/claim</strong>
-                    <span style="color: var(--mc-gray);">Protect your builds</span>
-                </div>
+                <div class="cmd-item"><strong>/help</strong><span style="color: var(--mc-gray);">Server guide</span></div>
+                <div class="cmd-item"><strong>/back</strong><span style="color: var(--mc-gray);">Go to your previous position or death place</span></div>
+                <div class="cmd-item"><strong>/tpa &lt;player&gt;</strong><span style="color: var(--mc-gray);">Ask to teleport to someone</span></div>
+                <div class="cmd-item"><strong>/tpahere &lt;player&gt;</strong><span style="color: var(--mc-gray);">Ask someone to teleport to you</span></div>
+                <div class="cmd-item"><strong>/sethome &lt;name&gt;</strong><span style="color: var(--mc-gray);">Set a home</span></div>
+                <div class="cmd-item"><strong>/home &lt;name&gt;</strong><span style="color: var(--mc-gray);">Go to that home</span></div>
+                <div class="cmd-item"><strong>/sb</strong><span style="color: var(--mc-gray);">Toggle the scoreboard at the side</span></div>
+                <div class="cmd-item"><strong>/bingoplus</strong><span style="color: var(--mc-gray);">Gamble an item</span></div>
+                <div class="cmd-item" style="grid-column: 1 / -1;"><strong>Press Tab</strong><span style="color: var(--mc-gray);">See all online players and some server info</span></div>
             </div>
         </div>
 
-        <!-- Important Links -->
+        <!-- Rules -->
         <div class="mc-panel">
-            <h2>Important Links</h2>
+            <h2>Rules</h2>
+            <ol style="padding-left: 20px; color: var(--mc-gray); font-size: 1.25rem; line-height: 1.6;">
+                <li style="margin-bottom: 12px;"><span>Don't be an asshole.</span></li>
+                <li style="margin-bottom: 12px;">Mods/resource packs that provide an unfair advantage are <span>not allowed</span>, such as but not limited to X-Ray, Flight, Autohitter, etc.</li>
+                <li style="margin-bottom: 12px;">Mods like <span>schematica</span> or <span>litematica</span> are OK, provided that you don't use the Easy Place or similar feature.</li>
+                <li style="margin-bottom: 12px;">Players are kindly requested <span>not to build massive farms</span> with many entities like mobs, chests, or hoppers as this could degrade the experience for everyone.</li>
+            </ol>
+        </div>
+
+        <!-- Tools & Links -->
+        <div class="mc-panel">
+            <h2>Tools & Links</h2>
             <ul>
-                <li><span>Live 3D Web Map:</span> <a href="https://map.stimmie.dev" target="_blank" style="color: var(--mc-aqua);">map.stimmie.dev</a></li>
-                <li><span>Server Analytics:</span> <a href="http://mc.stimmie.dev:8804" target="_blank" style="color: var(--mc-aqua);">Plan Dashboard</a></li>
+                <li><a href="https://bloxelizer.com/schematics" target="_blank" style="color: var(--mc-aqua);">Schema hub</a></li>
+                <li><a href="https://imagetopixelapp.com/" target="_blank" style="color: var(--mc-aqua);">Pixel art generator</a></li>
+                <li><a href="https://www.plotz.co.uk/" target="_blank" style="color: var(--mc-aqua);">3D modeller to schema (Plotz)</a></li>
+                <li><a href="https://www.mcworldtools.com/" target="_blank" style="color: var(--mc-aqua);">World tools</a></li>
+                <li><a href="https://wisehosting.com/tools" target="_blank" style="color: var(--mc-aqua);">Other tools (Wisehosting)</a></li>
             </ul>
         </div>
 
@@ -378,7 +414,7 @@
         document.body.style.imageRendering = 'pixelated';
 
         // ----------------------------------------------------
-        // Three.js Exploding Dirt Blocks Animation
+        // Three.js Orbiting Dirt Blocks Animation
         // ----------------------------------------------------
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -397,40 +433,26 @@
         const material = new THREE.MeshLambertMaterial({ map: texture });
 
         const cubes = [];
-        const numCubes = 100;
+        const numCubes = 120;
 
         for (let i = 0; i < numCubes; i++) {
-            // Clustered start position
-            const distance = Math.random() * 3;
             const theta = Math.random() * 2 * Math.PI;
             const phi = Math.acos((Math.random() * 2) - 1);
-            
-            const x = distance * Math.sin(phi) * Math.cos(theta);
-            const y = distance * Math.sin(phi) * Math.sin(theta);
-            const z = distance * Math.cos(phi);
-
-            // Explosion trajectory
-            const trajX = (x === 0) ? (Math.random() - 0.5) : x;
-            const trajY = (y === 0) ? (Math.random() - 0.5) : y;
-            const trajZ = (z === 0) ? (Math.random() - 0.5) : z;
-            
-            const len = Math.sqrt(trajX*trajX + trajY*trajY + trajZ*trajZ);
 
             const cube = new THREE.Mesh(geometry, material);
 
-            // Random initial rotation
             cube.rotation.x = Math.random() * Math.PI;
             cube.rotation.y = Math.random() * Math.PI;
 
-            // Varied sizes for blocks
             const scale = 0.3 + Math.random() * 0.7;
             cube.scale.set(scale, scale, scale);
 
+            // Orbit data
             cube.userData = {
-                baseX: x, baseY: y, baseZ: z,
-                trajX: (trajX/len) * (1 + Math.random() * 2), 
-                trajY: (trajY/len) * (1 + Math.random() * 2), 
-                trajZ: (trajZ/len) * (1 + Math.random() * 2),
+                distance: 1.5 + Math.random() * 5, // Random distance from center
+                theta: theta,
+                phi: phi,
+                orbitSpeed: (Math.random() - 0.5) * 0.015,
                 rotSpeedX: (Math.random() - 0.5) * 0.05,
                 rotSpeedY: (Math.random() - 0.5) * 0.05
             };
@@ -462,7 +484,7 @@
             time += 0.01;
 
             // Explosion factor based on scroll
-            const scrollFactor = Math.pow(currentScroll * 0.008, 1.2);
+            const scrollFactor = Math.pow(currentScroll * 0.005, 1.15);
 
             // Slow global rotation
             scene.rotation.y = time * 0.1;
@@ -471,10 +493,14 @@
             cubes.forEach(cube => {
                 const data = cube.userData;
                 
-                // Final position: base + explosion trajectory
-                cube.position.x = data.baseX + (data.trajX * scrollFactor);
-                cube.position.y = data.baseY + (data.trajY * scrollFactor);
-                cube.position.z = data.baseZ + (data.trajZ * scrollFactor);
+                // Explode radius + orbit
+                const r = data.distance * (1 + scrollFactor * 0.5);
+                data.theta += data.orbitSpeed;
+                
+                // Spherical to Cartesian coordinates
+                cube.position.x = r * Math.sin(data.phi) * Math.cos(data.theta);
+                cube.position.y = r * Math.cos(data.phi);
+                cube.position.z = r * Math.sin(data.phi) * Math.sin(data.theta);
 
                 cube.rotation.x += data.rotSpeedX;
                 cube.rotation.y += data.rotSpeedY;
