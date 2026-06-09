@@ -37,8 +37,8 @@
             --bg-dark: #030712;
             --panel-bg: rgba(17, 24, 39, 0.7);
             --panel-border: rgba(0, 255, 255, 0.15);
-            --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
+            --text-main: #FFFFFF; /* Pure white for max contrast */
+            --text-muted: #CBD5E1; /* Slate 300 - much brighter than before for WCAG AA/AAA */
         }
 
         * {
@@ -149,7 +149,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 139, 139, 0.3));
-            color: var(--accent-main);
+            color: #FFFFFF; /* Pure white text for WCAG compliance on tinted background */
             font-family: 'Outfit', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
@@ -160,6 +160,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.15), inset 0 0 15px rgba(0, 255, 255, 0.1);
             backdrop-filter: blur(5px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* extra pop */
         }
         
         .copy-btn:hover {
@@ -332,7 +333,8 @@
 
         a {
             color: var(--accent-main);
-            text-decoration: none;
+            text-decoration: underline; /* WCAG standard for links */
+            text-underline-offset: 3px;
             transition: all 0.2s;
             position: relative;
         }
@@ -433,7 +435,7 @@
                 <ul>
                     <li>Add the IP <span class="code-block">crib.stimmie.dev</span> to your server list and join.</li>
                     <li><strong>Official:</strong> <a href="https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc" target="_blank">Buy Minecraft for $30</a></li>
-                    <li><strong>Alternative:</strong> You can install <span>skLauncher</span> to play for free (cracked accounts are supported).</li>
+                    <li><strong>Alternative:</strong> You can install <a href="https://skmedix.pl/" target="_blank">skLauncher</a> to play for free (cracked accounts are supported).</li>
                 </ul>
 
                 <h3>Bedrock Edition (Mobile/Console)</h3>
@@ -662,12 +664,12 @@
                 const btn = document.getElementById('copyBtn');
                 btn.innerText = "Copied to Clipboard!";
                 btn.style.background = "linear-gradient(135deg, rgba(0, 255, 170, 0.2), rgba(0, 150, 100, 0.4))";
-                btn.style.color = "var(--accent-green)";
+                btn.style.color = "#FFFFFF";
                 btn.style.borderColor = "var(--accent-green)";
                 setTimeout(() => {
-                    btn.innerText = "Click to Copy IP";
+                    btn.innerText = "Copy IP: crib.stimmie.dev";
                     btn.style.background = "linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 139, 139, 0.3))";
-                    btn.style.color = "var(--accent-main)";
+                    btn.style.color = "#FFFFFF";
                     btn.style.borderColor = "var(--accent-main)";
                 }, 2000);
             });
