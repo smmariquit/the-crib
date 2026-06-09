@@ -35,10 +35,10 @@
             --mc-red: #FF3366;
             --mc-aqua: #00FFFF;
             --mc-gold: #008B8B; /* Dark Cyan */
-            --text-main: #F8FAFC;
-            --text-muted: #A8B8D0;
-            --panel-bg: rgba(6, 8, 12, 0.85); /* Slick Obsidian Dark */
-            --panel-border: rgba(0, 255, 255, 0.15); /* Cyan glow border */
+            --text-main: #FFFFFF; /* Pure white for max contrast */
+            --text-muted: #E2E8F0; /* Brighter muted color */
+            --panel-bg: rgba(0, 0, 0, 0.92); /* Darker panel for contrast */
+            --panel-border: rgba(0, 255, 255, 0.2); /* Cyan glow border */
         }
 
         * {
@@ -50,12 +50,12 @@
         body {
             font-family: 'VT323', monospace;
             color: var(--text-main);
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
             background-color: #030406;
-            font-size: 1.45rem; /* VT323 is smaller by default, so we bump it up */
+            font-size: 1.65rem; /* Significantly larger base size */
             letter-spacing: 0.5px;
-            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.9); /* Adds extra thickness */
+            /* Removed body text-shadow for crispness and contrast */
         }
 
         h1, h2, h3, .mc-font {
@@ -174,7 +174,7 @@
 
         .mc-panel h2 {
             color: var(--mc-gold);
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 20px;
             border-bottom: 1px solid var(--panel-border);
             padding-bottom: 12px;
@@ -183,21 +183,21 @@
 
         .mc-panel h3 {
             color: var(--mc-aqua);
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             margin-bottom: 12px;
             margin-top: 25px;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.8);
         }
 
         .mc-panel p {
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             margin-bottom: 16px;
         }
 
         .mc-panel ul, .mc-panel ol {
             padding-left: 24px;
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1.45rem;
             margin-bottom: 16px;
         }
 
@@ -256,14 +256,14 @@
             display: block;
             color: var(--mc-yellow);
             font-family: 'Pixelify Sans', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin-bottom: 4px;
             letter-spacing: 0.5px;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.8);
         }
 
         .cmd-item span {
-            font-size: 0.95rem;
+            font-size: 1.3rem;
             color: var(--text-muted);
         }
 
@@ -286,7 +286,6 @@
             font-size: 0.95rem;
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 600px) {
             .container {
                 padding: 40px 15px;
@@ -295,13 +294,19 @@
                 padding: 24px 20px;
             }
             .mc-panel h2 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             .mc-panel h3 {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
             .mc-panel p, .mc-panel ul, .mc-panel ol {
-                font-size: 1rem;
+                font-size: 1.4rem;
+            }
+            .cmd-item strong {
+                font-size: 1.4rem;
+            }
+            .cmd-item span {
+                font-size: 1.2rem;
             }
             .mc-btn {
                 width: 100%;
