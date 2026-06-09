@@ -67,7 +67,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 24px 16px;
             position: relative;
             z-index: 1;
         }
@@ -80,8 +80,8 @@
             background-color: var(--panel-bg);
             border: 1px solid var(--panel-border);
             border-radius: 20px;
-            padding: 20px 30px;
-            margin-bottom: 30px;
+            padding: 14px 24px;
+            margin-bottom: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
@@ -92,9 +92,9 @@
         }
 
         .header-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             border: 2px solid var(--panel-border);
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: transform 0.3s;
@@ -105,7 +105,7 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-bottom: 0;
             background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
             -webkit-background-clip: text;
@@ -115,7 +115,7 @@
         }
 
         .subtitle {
-            font-size: 1.05rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             font-weight: 500;
         }
@@ -128,9 +128,9 @@
             background: #1E293B;
             color: #FFFFFF;
             font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            padding: 10px 24px;
+            padding: 8px 20px;
             border: 1px solid var(--panel-border);
             border-radius: 50px;
             cursor: pointer;
@@ -148,10 +148,10 @@
         .panel {
             background-color: var(--panel-bg);
             border: 1px solid var(--panel-border);
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            padding: 35px 40px;
-            margin-bottom: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            padding: 20px 24px;
+            margin-bottom: 16px;
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease;
@@ -170,27 +170,27 @@
 
         .panel h2 {
             color: var(--text-main);
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+            font-size: 1.4rem;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .panel h2::before {
             content: '';
             display: inline-block;
-            width: 12px;
-            height: 24px;
+            width: 8px;
+            height: 20px;
             background: var(--accent-main);
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         /* Commands Layout */
         .cmd-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 8px;
         }
         
         @media (min-width: 600px) {
@@ -207,8 +207,8 @@
 
         .cmd-item {
             background: rgba(255, 255, 255, 0.03);
-            padding: 20px;
-            border-radius: 16px;
+            padding: 12px 14px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.2s;
         }
@@ -216,7 +216,7 @@
         .cmd-item:hover {
             background: rgba(59, 130, 246, 0.05);
             border-color: var(--panel-border);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .cmd-item strong {
@@ -224,13 +224,14 @@
             color: var(--accent-main);
             font-family: 'Outfit', sans-serif;
             font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 6px;
+            font-size: 1.05rem;
+            margin-bottom: 2px;
         }
 
         .cmd-item span {
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
+            line-height: 1.4;
         }
 
         a {
@@ -247,10 +248,10 @@
 
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding-bottom: 40px;
+            margin-top: 30px;
+            padding-bottom: 24px;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         footer a {
@@ -273,11 +274,11 @@
                 width: 100%;
             }
             .panel {
-                padding: 30px 20px;
-                border-radius: 20px;
+                padding: 18px 16px;
+                border-radius: 14px;
             }
             .panel h2 {
-                font-size: 1.8rem;
+                font-size: 1.3rem;
             }
         }
     </style>
