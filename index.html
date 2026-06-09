@@ -27,7 +27,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -36,12 +36,10 @@
             --mc-red: #FF5555;
             --mc-aqua: #55FFFF;
             --mc-gold: #FFAA00;
-            --mc-gray: #AAAAAA;
-            --mc-text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.9);
-            --mc-btn-bg: #8B8B8B;
-            --mc-btn-border-light: #FFFFFF;
-            --mc-btn-border-dark: #373737;
-            --mc-btn-border-hover: #7E94E5;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --panel-bg: rgba(20, 24, 30, 0.85);
+            --panel-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -51,18 +49,24 @@
         }
 
         body {
-            font-family: 'Pixelify Sans', sans-serif;
-            color: #E0E0E0;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.7;
             overflow-x: hidden;
-            text-shadow: var(--mc-text-shadow);
-            background-color: #000;
+            background-color: #050505;
         }
 
+        h1, h2, h3, .mc-font {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Extremely dark overlay so the dirt background is very subtle */
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(10, 12, 16, 0.92);
             z-index: -2;
         }
 
@@ -72,93 +76,99 @@
             width: 100vw; height: 100vh;
             z-index: -1;
             pointer-events: none;
+            opacity: 0.6; /* Dim the orbiting blocks */
         }
 
         .container {
-            max-width: 900px;
+            max-width: 850px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 20px;
         }
 
         h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(3rem, 8vw, 4.5rem);
             color: var(--mc-yellow);
             text-align: center;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.8);
         }
 
         .subtitle {
             text-align: center;
-            font-size: 1.5rem;
-            color: var(--mc-gray);
+            font-size: 1.2rem;
+            color: var(--text-muted);
             margin-bottom: 40px;
+            font-weight: 500;
         }
 
         .hero-img {
             display: block;
-            width: 128px;
-            height: 128px;
+            width: 110px;
+            height: 110px;
             margin: 0 auto 20px auto;
             image-rendering: pixelated;
-            border: 4px solid #000;
-            box-shadow: 0 0 0 4px #555;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid var(--panel-border);
         }
 
+        /* Refined Button */
         .mc-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--mc-btn-bg);
+            background-color: #2F855A;
             color: #FFFFFF;
-            font-family: 'Pixelify Sans', sans-serif;
-            font-size: 1.4rem;
-            padding: 12px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 14px 32px;
             text-decoration: none;
             border: none;
-            border-top: 4px solid var(--mc-btn-border-light);
-            border-left: 4px solid var(--mc-btn-border-light);
-            border-bottom: 4px solid var(--mc-btn-border-dark);
-            border-right: 4px solid var(--mc-btn-border-dark);
+            border-radius: 6px;
+            border-bottom: 4px solid #1C4532;
             cursor: pointer;
-            box-shadow: inset -2px -2px 0px rgba(0,0,0,0.25);
-            margin: 20px auto;
-            text-shadow: var(--mc-text-shadow);
+            margin: 10px auto 20px auto;
+            transition: transform 0.1s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
         
         .mc-btn:active {
-            border-top: 4px solid var(--mc-btn-border-dark);
-            border-left: 4px solid var(--mc-btn-border-dark);
-            border-bottom: 4px solid var(--mc-btn-border-light);
-            border-right: 4px solid var(--mc-btn-border-light);
-            background-color: #707070;
+            transform: translateY(4px);
+            border-bottom: 0px solid #1C4532;
+            margin-bottom: 24px; /* compensate for transform */
         }
 
         .mc-btn:hover {
-            border-color: var(--mc-btn-border-hover);
-            background-color: #7E94E5;
-            outline: 2px solid #000;
+            background-color: #38A169;
         }
 
         .center-wrap {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .player-count {
-            font-size: 1.25rem;
-            color: var(--mc-gray);
-            margin-top: 10px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+            background: rgba(0,0,0,0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--panel-border);
         }
 
+        /* Clean Modern Panels */
         .mc-panel {
-            background-color: rgba(0, 0, 0, 0.85);
-            border: 4px solid #000;
-            box-shadow: inset 0 0 0 4px #373737;
-            padding: 30px;
-            margin-bottom: 40px;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            margin-bottom: 30px;
             position: relative;
         }
 
@@ -166,33 +176,38 @@
             color: var(--mc-gold);
             font-size: 2rem;
             margin-bottom: 20px;
-            border-bottom: 2px dashed #555;
-            padding-bottom: 10px;
-            letter-spacing: 1px;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 12px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
         }
 
         .mc-panel h3 {
             color: var(--mc-aqua);
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            margin-top: 25px;
-            letter-spacing: 1px;
-        }
-
-        .mc-panel p, .mc-panel li {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             margin-bottom: 12px;
-            letter-spacing: 0.5px;
+            margin-top: 25px;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.8);
         }
 
-        .mc-panel ul {
-            list-style-type: square;
-            padding-left: 30px;
-            color: var(--mc-gray);
+        .mc-panel p {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .mc-panel ul, .mc-panel ol {
+            padding-left: 24px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+        }
+
+        .mc-panel li {
+            margin-bottom: 10px;
         }
 
         .mc-panel li span {
-            color: #FFFFFF;
+            color: var(--text-main);
+            font-weight: 600;
         }
 
         .no-bullets {
@@ -202,18 +217,20 @@
 
         .code-block {
             display: inline-block;
-            background: #000;
+            background: rgba(0, 0, 0, 0.5);
             color: var(--mc-green);
             padding: 4px 10px;
-            border: 2px solid #555;
-            margin: 5px 0;
-            letter-spacing: 1px;
+            border-radius: 4px;
+            border: 1px solid var(--panel-border);
+            margin: 2px 0;
+            font-family: monospace;
+            font-size: 0.95em;
         }
 
         .cmd-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
+            gap: 12px;
         }
         
         @media (min-width: 600px) {
@@ -223,73 +240,73 @@
         }
 
         .cmd-item {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border: 2px solid #333;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--panel-border);
+            transition: background 0.2s;
+        }
+
+        .cmd-item:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .cmd-item strong {
             display: block;
             color: var(--mc-yellow);
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.8);
+        }
+
+        .cmd-item span {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        a {
+            color: var(--mc-aqua);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: #FFFFFF;
+            text-decoration: underline;
         }
 
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding-bottom: 30px;
-            color: var(--mc-gray);
-            font-size: 1.1rem;
-        }
-
-        footer a {
-            color: var(--mc-aqua);
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+            margin-top: 60px;
+            padding-bottom: 40px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
         /* Mobile Adjustments */
         @media (max-width: 600px) {
             .container {
-                padding: 20px 15px;
+                padding: 40px 15px;
             }
             .mc-panel {
-                padding: 15px;
+                padding: 24px 20px;
             }
             .mc-panel h2 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             .mc-panel h3 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
-            .mc-panel p, .mc-panel li {
-                font-size: 1.1rem;
+            .mc-panel p, .mc-panel ul, .mc-panel ol {
+                font-size: 1rem;
             }
             .mc-btn {
-                font-size: 1.1rem;
-                padding: 10px 20px;
                 width: 100%;
-                text-align: center;
             }
             .code-block {
-                font-size: 1rem !important; /* Ensure it scales down on mobile */
                 word-break: break-all;
-            }
-            .hero-img {
-                width: 96px;
-                height: 96px;
-            }
-            h1 {
-                font-size: 3rem;
-            }
-            .subtitle {
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -306,10 +323,10 @@
             <h1>The Crib</h1>
             <div class="subtitle">Java & Bedrock 1.21.x</div>
             
-            <button class="mc-btn" id="copyBtn" onclick="copyIP()">
+            <button class="mc-btn mc-font" id="copyBtn" onclick="copyIP()">
                 Click to Copy IP
             </button>
-            <div class="code-block" style="font-size: 1.5rem; margin-top: 10px;" id="ipDisplay">crib.stimmie.dev</div>
+            <div class="code-block mc-font" style="font-size: 1.2rem; background: transparent; border: none; color: var(--text-muted);" id="ipDisplay">crib.stimmie.dev</div>
 
             <div class="player-count" id="status-text">Pinging server...</div>
         </div>
@@ -317,29 +334,31 @@
         <!-- How to Join -->
         <div class="mc-panel">
             <h2>How to Join</h2>
-            <p style="margin-bottom: 20px;">Java and Bedrock players share the exact same server and inventory!</p>
+            <p>Java and Bedrock players share the exact same server and inventory!</p>
             
-            <h3>Java Edition (PC/Mac):</h3>
+            <h3>Java Edition (PC/Mac)</h3>
             <ul>
                 <li>Add the IP <span class="code-block">crib.stimmie.dev</span> to your server list and join.</li>
-                <li><strong>Official:</strong> <a href="https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc" target="_blank" style="color: var(--mc-aqua);">Buy Minecraft for $30</a></li>
+                <li><strong>Official:</strong> <a href="https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc" target="_blank">Buy Minecraft for $30</a></li>
                 <li><strong>Alternative:</strong> You can install <span>skLauncher</span> to play for free (cracked accounts are supported).</li>
             </ul>
 
-            <h3>Bedrock Edition (Mobile/Console):</h3>
+            <h3>Bedrock Edition (Mobile/Console)</h3>
             <ul>
                 <li>Change your Bedrock username to <span>exactly match your Java Name</span>.</li>
                 <li>Join the server at <span class="code-block">crib.stimmie.dev</span> (Port: 19132).</li>
                 <li>Type <span class="code-block">/login &lt;password&gt;</span> using your Java password in chat.</li>
                 <li><strong>Android:</strong> You can buy the game for ~50 pesos on the Play Store.</li>
             </ul>
-            <p style="color: var(--mc-green); margin-top: 15px;">Note: Login sessions are securely saved for 6 hours!</p>
+            <div style="background: rgba(85, 255, 85, 0.1); border: 1px solid rgba(85, 255, 85, 0.3); padding: 12px; border-radius: 6px; margin-top: 20px;">
+                <p style="color: var(--mc-green); margin: 0; font-size: 0.95rem;"><strong>Note:</strong> Login sessions are securely saved for 6 hours!</p>
+            </div>
         </div>
 
         <!-- Server Info & Details -->
         <div class="mc-panel">
             <h2>Server Information</h2>
-            <ul class="no-bullets" style="margin-bottom: 25px;">
+            <ul class="no-bullets" style="margin-bottom: 30px;">
                 <li><span>Compatibility:</span> Java and Bedrock</li>
                 <li><span>Uptime:</span> 24/7</li>
                 <li><span>Physical Location:</span> Singapore</li>
@@ -349,7 +368,7 @@
             </ul>
 
             <h3>Worlds (Borders)</h3>
-            <ul style="margin-bottom: 25px;">
+            <ul style="margin-bottom: 30px;">
                 <li><span>Overworld:</span> 20,000 x 20,000 centered at (0,0)</li>
                 <li><span>Nether:</span> 20,000 x 20,000 centered at (0,0)</li>
                 <li><span>End:</span> 20,000 x 20,000 centered at (0,0)</li>
@@ -370,26 +389,26 @@
         <div class="mc-panel">
             <h2>Basic Commands</h2>
             <div class="cmd-grid">
-                <div class="cmd-item"><strong>/help</strong><span style="color: var(--mc-gray);">Server guide</span></div>
-                <div class="cmd-item"><strong>/back</strong><span style="color: var(--mc-gray);">Go to your previous position or death place</span></div>
-                <div class="cmd-item"><strong>/tpa &lt;player&gt;</strong><span style="color: var(--mc-gray);">Ask to teleport to someone</span></div>
-                <div class="cmd-item"><strong>/tpahere &lt;player&gt;</strong><span style="color: var(--mc-gray);">Ask someone to teleport to you</span></div>
-                <div class="cmd-item"><strong>/sethome &lt;name&gt;</strong><span style="color: var(--mc-gray);">Set a home</span></div>
-                <div class="cmd-item"><strong>/home &lt;name&gt;</strong><span style="color: var(--mc-gray);">Go to that home</span></div>
-                <div class="cmd-item"><strong>/sb</strong><span style="color: var(--mc-gray);">Toggle the scoreboard at the side</span></div>
-                <div class="cmd-item"><strong>/bingoplus</strong><span style="color: var(--mc-gray);">Gamble an item</span></div>
-                <div class="cmd-item" style="grid-column: 1 / -1;"><strong>Press Tab</strong><span style="color: var(--mc-gray);">See all online players and some server info</span></div>
+                <div class="cmd-item"><strong>/help</strong><span>Server guide</span></div>
+                <div class="cmd-item"><strong>/back</strong><span>Go to your previous position or death place</span></div>
+                <div class="cmd-item"><strong>/tpa &lt;player&gt;</strong><span>Ask to teleport to someone</span></div>
+                <div class="cmd-item"><strong>/tpahere &lt;player&gt;</strong><span>Ask someone to teleport to you</span></div>
+                <div class="cmd-item"><strong>/sethome &lt;name&gt;</strong><span>Set a home</span></div>
+                <div class="cmd-item"><strong>/home &lt;name&gt;</strong><span>Go to that home</span></div>
+                <div class="cmd-item"><strong>/sb</strong><span>Toggle the scoreboard at the side</span></div>
+                <div class="cmd-item"><strong>/bingoplus</strong><span>Gamble an item</span></div>
+                <div class="cmd-item" style="grid-column: 1 / -1;"><strong>Press Tab</strong><span>See all online players and some server info</span></div>
             </div>
         </div>
 
         <!-- Rules -->
         <div class="mc-panel">
             <h2>Rules</h2>
-            <ol style="padding-left: 20px; color: var(--mc-gray); font-size: 1.25rem; line-height: 1.6;">
-                <li style="margin-bottom: 12px;"><span>Don't be an asshole.</span></li>
-                <li style="margin-bottom: 12px;">Mods/resource packs that provide an unfair advantage are <span>not allowed</span>, such as but not limited to X-Ray, Flight, Autohitter, etc.</li>
-                <li style="margin-bottom: 12px;">Mods like <span>schematica</span> or <span>litematica</span> are OK, provided that you don't use the Easy Place or similar feature.</li>
-                <li style="margin-bottom: 12px;">Players are kindly requested <span>not to build massive farms</span> with many entities like mobs, chests, or hoppers as this could degrade the experience for everyone.</li>
+            <ol style="padding-left: 20px;">
+                <li><span>Don't be an asshole.</span></li>
+                <li>Mods/resource packs that provide an unfair advantage are <span>not allowed</span>, such as but not limited to X-Ray, Flight, Autohitter, etc.</li>
+                <li>Mods like <span>schematica</span> or <span>litematica</span> are OK, provided that you don't use the Easy Place or similar feature.</li>
+                <li>Players are kindly requested <span>not to build massive farms</span> with many entities like mobs, chests, or hoppers as this could degrade the experience for everyone.</li>
             </ol>
         </div>
 
@@ -397,19 +416,19 @@
         <div class="mc-panel">
             <h2>Tools & Links</h2>
             <ul>
-                <li><a href="https://bloxelizer.com/schematics" target="_blank" style="color: var(--mc-aqua);">Schema hub</a></li>
-                <li><a href="https://imagetopixelapp.com/" target="_blank" style="color: var(--mc-aqua);">Pixel art generator</a></li>
-                <li><a href="https://www.plotz.co.uk/" target="_blank" style="color: var(--mc-aqua);">3D modeller to schema (Plotz)</a></li>
-                <li><a href="https://www.mcworldtools.com/" target="_blank" style="color: var(--mc-aqua);">World tools</a></li>
-                <li><a href="https://wisehosting.com/tools" target="_blank" style="color: var(--mc-aqua);">Other tools (Wisehosting)</a></li>
+                <li><a href="https://bloxelizer.com/schematics" target="_blank">Schema hub</a></li>
+                <li><a href="https://imagetopixelapp.com/" target="_blank">Pixel art generator</a></li>
+                <li><a href="https://www.plotz.co.uk/" target="_blank">3D modeller to schema (Plotz)</a></li>
+                <li><a href="https://www.mcworldtools.com/" target="_blank">World tools</a></li>
+                <li><a href="https://wisehosting.com/tools" target="_blank">Other tools (Wisehosting)</a></li>
             </ul>
         </div>
 
         <!-- Footer -->
         <footer>
-            <div style="margin-bottom: 10px;">
-                <a href="https://stimmie.dev">Portfolio</a> | 
-                <a href="https://github.com/smmariquit">GitHub</a> | 
+            <div style="margin-bottom: 12px;">
+                <a href="https://stimmie.dev">Portfolio</a> &nbsp;|&nbsp; 
+                <a href="https://github.com/smmariquit">GitHub</a> &nbsp;|&nbsp; 
                 <a href="https://joinpizza.fun">Pizza & Friends</a>
             </div>
             <p>© 2026 The Crib by Stimmie. All rights reserved.</p>
@@ -428,11 +447,9 @@
             canvas.height = 16;
             const ctx = canvas.getContext('2d');
             
-            // Base brown
             ctx.fillStyle = '#866043';
             ctx.fillRect(0, 0, 16, 16);
             
-            // Add noise for dirt details
             const colors = ['#735238', '#5b3f29', '#966c4a', '#4c3321'];
             for(let i = 0; i < 16; i++) {
                 for(let j = 0; j < 16; j++) {
@@ -447,22 +464,21 @@
 
         const dirtDataURL = createDirtTexture();
 
-        // Set body background to tiled dirt
+        // Subtle tiled dirt background
         document.body.style.backgroundImage = `url(${dirtDataURL})`;
-        document.body.style.backgroundSize = '64px 64px'; // pixelated scaling
+        document.body.style.backgroundSize = '64px 64px'; 
         document.body.style.imageRendering = 'pixelated';
 
         // ----------------------------------------------------
-        // Three.js Orbiting Dirt Blocks Animation
+        // Three.js Orbiting Dirt Blocks Animation (Subtle)
         // ----------------------------------------------------
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false }); // antialias false for pixel look
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // Load generated dirt texture for 3D blocks
         const loader = new THREE.TextureLoader();
         const texture = loader.load(dirtDataURL);
         texture.magFilter = THREE.NearestFilter;
@@ -472,7 +488,7 @@
         const material = new THREE.MeshLambertMaterial({ map: texture });
 
         const cubes = [];
-        const numCubes = 40; // Lessened blocks
+        const numCubes = 35; // Fewer blocks so it's less distracting
 
         for (let i = 0; i < numCubes; i++) {
             const theta = Math.random() * 2 * Math.PI;
@@ -483,17 +499,17 @@
             cube.rotation.x = Math.random() * Math.PI;
             cube.rotation.y = Math.random() * Math.PI;
 
-            const scale = 0.3 + Math.random() * 0.7;
+            // Slightly smaller scale
+            const scale = 0.2 + Math.random() * 0.5;
             cube.scale.set(scale, scale, scale);
 
-            // Orbit data
             cube.userData = {
-                distance: 2 + Math.random() * 5, // Random distance from center
+                distance: 3 + Math.random() * 6, // Pushed a bit further out
                 theta: theta,
                 phi: phi,
-                orbitSpeed: (Math.random() - 0.5) * 0.015,
-                rotSpeedX: (Math.random() - 0.5) * 0.05,
-                rotSpeedY: (Math.random() - 0.5) * 0.05
+                orbitSpeed: (Math.random() - 0.5) * 0.01, // Slower orbit
+                rotSpeedX: (Math.random() - 0.5) * 0.02,
+                rotSpeedY: (Math.random() - 0.5) * 0.02
             };
 
             scene.add(cube);
@@ -501,32 +517,27 @@
         }
 
         // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Dimmer light
         scene.add(ambientLight);
         
-        const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.4);
         dirLight.position.set(5, 10, 7);
         scene.add(dirLight);
 
         camera.position.z = 10;
 
-        // Animation Loop
         let time = 0;
         function animate() {
             requestAnimationFrame(animate);
             time += 0.01;
 
-            // Slow global rotation
-            scene.rotation.y = time * 0.1;
-            scene.rotation.x = Math.sin(time * 0.05) * 0.2;
+            scene.rotation.y = time * 0.05; // Even slower scene rotation
+            scene.rotation.x = Math.sin(time * 0.02) * 0.1;
 
             cubes.forEach(cube => {
                 const data = cube.userData;
-                
-                // Pure orbit, no explosion
                 data.theta += data.orbitSpeed;
                 
-                // Spherical to Cartesian coordinates
                 cube.position.x = data.distance * Math.sin(data.phi) * Math.cos(data.theta);
                 cube.position.y = data.distance * Math.cos(data.phi);
                 cube.position.z = data.distance * Math.sin(data.phi) * Math.sin(data.theta);
@@ -554,10 +565,10 @@
             navigator.clipboard.writeText(ip).then(() => {
                 const btn = document.getElementById('copyBtn');
                 btn.innerText = "Copied to Clipboard!";
-                btn.style.color = "var(--mc-green)";
+                btn.style.backgroundColor = "#276749"; // Darker green on success
                 setTimeout(() => {
                     btn.innerText = "Click to Copy IP";
-                    btn.style.color = "#FFFFFF";
+                    btn.style.backgroundColor = "#2F855A";
                 }, 2000);
             });
         }
