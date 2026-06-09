@@ -253,6 +253,45 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            .mc-panel {
+                padding: 15px;
+            }
+            .mc-panel h2 {
+                font-size: 1.5rem;
+            }
+            .mc-panel h3 {
+                font-size: 1.3rem;
+            }
+            .mc-panel p, .mc-panel li {
+                font-size: 1.1rem;
+            }
+            .mc-btn {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                width: 100%;
+                text-align: center;
+            }
+            .code-block {
+                font-size: 1rem !important; /* Ensure it scales down on mobile */
+                word-break: break-all;
+            }
+            .hero-img {
+                width: 96px;
+                height: 96px;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -433,7 +472,7 @@
         const material = new THREE.MeshLambertMaterial({ map: texture });
 
         const cubes = [];
-        const numCubes = 120;
+        const numCubes = 40; // Lessened blocks
 
         for (let i = 0; i < numCubes; i++) {
             const theta = Math.random() * 2 * Math.PI;
@@ -449,7 +488,7 @@
 
             // Orbit data
             cube.userData = {
-                distance: 1.5 + Math.random() * 5, // Random distance from center
+                distance: 2 + Math.random() * 5, // Random distance from center
                 theta: theta,
                 phi: phi,
                 orbitSpeed: (Math.random() - 0.5) * 0.015,
@@ -471,20 +510,11 @@
 
         camera.position.z = 10;
 
-        // Scroll state
-        let currentScroll = 0;
-        window.addEventListener('scroll', () => {
-            currentScroll = window.scrollY;
-        });
-
         // Animation Loop
         let time = 0;
         function animate() {
             requestAnimationFrame(animate);
             time += 0.01;
-
-            // Explosion factor based on scroll
-            const scrollFactor = Math.pow(currentScroll * 0.005, 1.15);
 
             // Slow global rotation
             scene.rotation.y = time * 0.1;
@@ -493,14 +523,13 @@
             cubes.forEach(cube => {
                 const data = cube.userData;
                 
-                // Explode radius + orbit
-                const r = data.distance * (1 + scrollFactor * 0.5);
+                // Pure orbit, no explosion
                 data.theta += data.orbitSpeed;
                 
                 // Spherical to Cartesian coordinates
-                cube.position.x = r * Math.sin(data.phi) * Math.cos(data.theta);
-                cube.position.y = r * Math.cos(data.phi);
-                cube.position.z = r * Math.sin(data.phi) * Math.sin(data.theta);
+                cube.position.x = data.distance * Math.sin(data.phi) * Math.cos(data.theta);
+                cube.position.y = data.distance * Math.cos(data.phi);
+                cube.position.z = data.distance * Math.sin(data.phi) * Math.sin(data.theta);
 
                 cube.rotation.x += data.rotSpeedX;
                 cube.rotation.y += data.rotSpeedY;
