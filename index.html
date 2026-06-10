@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Crib | Survival Server</title>
-    <meta name="description" content="Stimmie's survival Minecraft server that never resets! Join Java & Bedrock crossplay via crib.stimmie.dev">
+    <meta name="description" content="Stimmie's survival Minecraft server that never resets! Join Java & Bedrock crossplay via mc.stimmie.dev">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="crib.png">
@@ -12,17 +12,17 @@
     <!-- Open Graph / Embed -->
     <meta property="og:site_name" content="The Crib">
     <meta property="og:title" content="The Crib | Java & Bedrock Survival">
-    <meta property="og:description" content="Stimmie's survival Minecraft server that never resets! Join via crib.stimmie.dev">
-    <meta property="og:image" content="https://crib.stimmie.dev/crib-og.png">
-    <meta property="og:url" content="https://crib.stimmie.dev">
+    <meta property="og:description" content="Stimmie's survival Minecraft server that never resets! Join via mc.stimmie.dev">
+    <meta property="og:image" content="https://mc.stimmie.dev/crib-og.png">
+    <meta property="og:url" content="https://mc.stimmie.dev">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#00FFFF">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Crib | Java & Bedrock Survival">
-    <meta name="twitter:description" content="Stimmie's survival Minecraft server that never resets! Join via crib.stimmie.dev">
-    <meta name="twitter:image" content="https://crib.stimmie.dev/crib-og.png">
+    <meta name="twitter:description" content="Stimmie's survival Minecraft server that never resets! Join via mc.stimmie.dev">
+    <meta name="twitter:image" content="https://mc.stimmie.dev/crib-og.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -439,7 +439,7 @@
             <div class="hero-right">
                 <div class="hero-actions">
                     <button class="copy-btn" id="copyBtn" onclick="copyIP()">
-                        Copy IP: crib.stimmie.dev
+                        Copy IP: mc.stimmie.dev
                     </button>
                     <a href="https://discord.gg/qdZfGqeubN" target="_blank" class="discord-btn">
                         Join Discord
@@ -460,7 +460,7 @@
                 
                 <h3>Java Edition (PC/Mac)</h3>
                 <ul>
-                    <li>Add the IP <span class="code-block">crib.stimmie.dev</span> to your server list and join.</li>
+                    <li>Add the IP <span class="code-block">mc.stimmie.dev</span> to your server list and join.</li>
                     <li><strong>Official:</strong> <a href="https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc" target="_blank">Buy Minecraft for $30</a></li>
                     <li><strong>Alternative:</strong> You can install <a href="https://skmedix.pl/" target="_blank">skLauncher</a> to play for free (cracked accounts are supported).</li>
                 </ul>
@@ -468,7 +468,7 @@
                 <h3>Bedrock Edition (Mobile/Console)</h3>
                 <ul>
                     <li>Change your username to <span>match your Java Name</span>.</li>
-                    <li>Join <span class="code-block">crib.stimmie.dev</span> — no port needed (uses the default 19132).</li>
+                    <li>Join <span class="code-block">mc.stimmie.dev</span> — no port needed (uses the default 19132).</li>
                     <li>Type <span class="code-block">/login &lt;password&gt;</span> in chat.</li>
                     <li><strong>Android:</strong> You can buy the game for ~50 pesos on the <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" target="_blank">Play Store</a>.</li>
                 </ul>
@@ -603,7 +603,7 @@
         // UI Logic
         // ----------------------------------------------------
         function copyIP() {
-            const ip = "crib.stimmie.dev";
+            const ip = "mc.stimmie.dev";
             navigator.clipboard.writeText(ip).then(() => {
                 const btn = document.getElementById('copyBtn');
                 btn.innerText = "Copied to Clipboard!";
@@ -611,7 +611,7 @@
                 btn.style.color = "#FFFFFF";
                 btn.style.borderColor = "var(--accent-green)";
                 setTimeout(() => {
-                    btn.innerText = "Copy IP: crib.stimmie.dev";
+                    btn.innerText = "Copy IP: mc.stimmie.dev";
                     btn.style.background = "#2563EB";
                     btn.style.color = "#FFFFFF";
                     btn.style.borderColor = "var(--accent-main)";
@@ -630,7 +630,7 @@
                     const maxPlayers = data.players?.max ?? '?';
                     statusText.innerHTML = `<span style="color: var(--accent-green); filter: drop-shadow(0 0 5px rgba(0,255,170,0.5));">● Online</span> — ${players}/${maxPlayers} players`;
                     
-                    const descText = `Stimmie's survival Minecraft server that never resets! Join ${players} players currently online via crib.stimmie.dev`;
+                    const descText = `Stimmie's survival Minecraft server that never resets! Join ${players} players currently online via mc.stimmie.dev`;
                     const metaDesc = document.querySelector('meta[name="description"]');
                     const ogDesc = document.querySelector('meta[property="og:description"]');
                     const twitterDesc = document.querySelector('meta[name="twitter:description"]');
