@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | The Crib</title>
+    <link rel="icon" type="image/png" href="crib.png">
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-main: #3B82F6;
+            --accent-green: #10B981;
+            --panel-bg: rgba(15, 23, 42, 0.95);
+            --panel-border: #1E293B;
+            --text-main: #FFFFFF;
+            --text-muted: #CBD5E1;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: #3b2b1f;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 0;
+        }
+        .card {
+            position: relative;
+            z-index: 1;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            padding: 48px 40px;
+            max-width: 540px;
+            text-align: center;
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 16px; }
+        .user {
+            color: var(--text-main);
+            font-weight: 700;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(16,185,129,0.3);
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 16px;
+            background: #2563EB;
+            color: #FFFFFF;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { background: #1D4ED8; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Thank you for supporting The Crib! ✦</h1>
+        <p>Your <strong style="color:var(--accent-main)">VIP</strong> rank for <span class="user" id="user">your account</span> is on its way.</p>
+        <p>If you're online, it applies within a few seconds. If you're offline, it will be granted automatically the next time you join <strong>mc.stimmie.dev</strong>.</p>
+        <a class="btn" href="/">Back to The Crib</a>
+    </div>
+    <script>
+        const u = new URLSearchParams(location.search).get('u');
+        if (u && /^[A-Za-z0-9_]{1,16}$/.test(u)) {
+            document.getElementById('user').textContent = u;
+        }
+    </script>
+</body>
+</html>

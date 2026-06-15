@@ -455,6 +455,34 @@
         </div>
 
         <div class="content-grid">
+            <!-- VIP Rank (Full Width) -->
+            <div class="panel full-width" id="vip">
+                <h2>VIP Rank — ₱250</h2>
+                <p>Support The Crib and unlock <span>VIP</span>. One-time payment, applied to your account automatically (on your next login if you're offline).</p>
+                <div style="display:grid; grid-template-columns:1fr; gap:24px;">
+                    <ul id="vip-perks">
+                        <li><span>VIP tag</span> in chat and the player list</li>
+                        <li><span>More /sethome slots</span> for your bases</li>
+                        <li>Cosmetic perks like <span class="code-block" style="font-size:0.85em;">/hat</span> and <span class="code-block" style="font-size:0.85em;">/feed</span></li>
+                        <li>A <span>thank-you</span> broadcast and our eternal gratitude</li>
+                    </ul>
+                    <form id="vip-form" onsubmit="return startCheckout(event)" style="display:flex; flex-direction:column; gap:14px; max-width:520px;">
+                        <label for="mc-username" style="color:var(--text-main); font-weight:600;">Your exact Minecraft username</label>
+                        <input id="mc-username" name="username" type="text" autocomplete="off" spellcheck="false"
+                               pattern="[A-Za-z0-9_]{1,16}" maxlength="16" required
+                               placeholder="e.g. Stimmie"
+                               style="padding:14px 16px; border-radius:12px; border:1px solid var(--panel-border); background:rgba(0,0,0,0.35); color:var(--text-main); font-size:1.05rem; font-family:'Inter',sans-serif;">
+                        <p style="font-size:0.9rem; margin:0; color:var(--text-muted);">
+                            Bedrock players: enter your name <strong>exactly as it shows in-game</strong> (including any Geyser prefix). Type it carefully — the rank is applied to this exact name.
+                        </p>
+                        <button type="submit" class="copy-btn" id="vip-btn" style="align-self:flex-start;">
+                            Get VIP — ₱250
+                        </button>
+                        <div id="vip-msg" style="font-size:0.95rem; color:var(--text-muted); min-height:1.2em;"></div>
+                    </form>
+                </div>
+            </div>
+
             <!-- How to Join -->
             <div class="panel">
                 <h2>How to Join</h2>
@@ -649,6 +677,63 @@
         
         checkServerStatus();
         setInterval(checkServerStatus, 60000);
+
+        // ----------------------------------------------------
+        // VIP Checkout (PayMongo)
+        // ----------------------------------------------------
+        // Add ?test=20 (or any value between 20 and 250) to the URL to run a
+        // cheap end-to-end test payment instead of the full ₱250.
+        const TEST_AMOUNT = (() => {
+            const v = parseInt(new URLSearchParams(location.search).get('test'), 10);
+            return Number.isInteger(v) && v >= 20 && v <= 250 ? v : null;
+        })();
+
+        if (TEST_AMOUNT) {
+            const btn = document.getElementById('vip-btn');
+            if (btn) btn.textContent = `Get VIP — TEST ₱${TEST_AMOUNT}`;
+        }
+
+        async function startCheckout(e) {
+            e.preventDefault();
+            const btn = document.getElementById('vip-btn');
+            const msg = document.getElementById('vip-msg');
+            const username = document.getElementById('mc-username').value.trim();
+
+            if (!/^[A-Za-z0-9_]{1,16}$/.test(username)) {
+                msg.style.color = '#F87171';
+                msg.textContent = 'Please enter a valid Minecraft username.';
+                return false;
+            }
+
+            btn.disabled = true;
+            const original = btn.textContent;
+            btn.textContent = 'Creating checkout…';
+            msg.style.color = 'var(--text-muted)';
+            msg.textContent = 'Redirecting you to PayMongo…';
+
+            try {
+                const payload = { username };
+                if (TEST_AMOUNT) payload.amount = TEST_AMOUNT;
+
+                const res = await fetch('/api/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.checkout_url) {
+                    throw new Error(data.error || 'Could not start checkout.');
+                }
+                window.location.href = data.checkout_url;
+            } catch (err) {
+                msg.style.color = '#F87171';
+                msg.textContent = err.message || 'Something went wrong. Please try again.';
+                btn.disabled = false;
+                btn.textContent = original;
+            }
+            return false;
+        }
     </script>
 </body>
 </html>
