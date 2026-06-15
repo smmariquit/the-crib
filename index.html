@@ -461,11 +461,9 @@
                 <p>Support The Crib and unlock <span>VIP</span>. One-time payment, applied to your account automatically (on your next login if you're offline).</p>
                 <div style="display:grid; grid-template-columns:1fr; gap:24px;">
                     <ul id="vip-perks">
-                        <li>A cosmetic <span>VIP tag</span> in chat and the player list</li>
-                        <li><span class="code-block" style="font-size:0.85em;">/hat</span> — wear any item as a hat</li>
-                        <li><span class="code-block" style="font-size:0.85em;">/nick</span> — give yourself a colored nickname</li>
+                        <li>A colored <span>☀ prefix</span> in chat and the player list</li>
+                        <li><span class="code-block" style="font-size:0.85em;">/hat</span> — wear any item on your head</li>
                         <li><span class="code-block" style="font-size:0.85em;">/skin</span> — change your in-game skin anytime</li>
-                        <li><span class="code-block" style="font-size:0.85em;">/cosmetics</span> — particles, pets, gadgets &amp; morphs</li>
                         <li><span class="code-block" style="font-size:0.85em;">/showitem</span> — show off your held item in chat</li>
                     </ul>
                     <form id="vip-form" onsubmit="return startCheckout(event)" style="display:flex; flex-direction:column; gap:14px; max-width:520px;">
@@ -683,18 +681,6 @@
         // ----------------------------------------------------
         // VIP Checkout (PayMongo)
         // ----------------------------------------------------
-        // Add ?test=20 (or any value between 20 and 250) to the URL to run a
-        // cheap end-to-end test payment instead of the full ₱250.
-        const TEST_AMOUNT = (() => {
-            const v = parseInt(new URLSearchParams(location.search).get('test'), 10);
-            return Number.isInteger(v) && v >= 1 && v <= 250 ? v : null;
-        })();
-
-        if (TEST_AMOUNT) {
-            const btn = document.getElementById('vip-btn');
-            if (btn) btn.textContent = `Get VIP — TEST ₱${TEST_AMOUNT}`;
-        }
-
         async function startCheckout(e) {
             e.preventDefault();
             const btn = document.getElementById('vip-btn');
@@ -715,7 +701,6 @@
 
             try {
                 const payload = { username };
-                if (TEST_AMOUNT) payload.amount = TEST_AMOUNT;
 
                 const res = await fetch('/api/checkout', {
                     method: 'POST',
