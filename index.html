@@ -681,6 +681,18 @@
         // ----------------------------------------------------
         // VIP Checkout (PayMongo)
         // ----------------------------------------------------
+        // Add ?test=20 (or any value between 20 and 250) to the URL to run a
+        // cheap end-to-end test payment instead of the full ₱250.
+        const TEST_AMOUNT = (() => {
+            const v = parseInt(new URLSearchParams(location.search).get('test'), 10);
+            return Number.isInteger(v) && v >= 1 && v <= 250 ? v : null;
+        })();
+
+        if (TEST_AMOUNT) {
+            const btn = document.getElementById('vip-btn');
+            if (btn) btn.textContent = `Get VIP — TEST ₱${TEST_AMOUNT}`;
+        }
+
         async function startCheckout(e) {
             e.preventDefault();
             const btn = document.getElementById('vip-btn');
@@ -701,6 +713,7 @@
 
             try {
                 const payload = { username };
+                if (TEST_AMOUNT) payload.amount = TEST_AMOUNT;
 
                 const res = await fetch('/api/checkout', {
                     method: 'POST',
