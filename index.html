@@ -685,7 +685,7 @@
         // cheap end-to-end test payment instead of the full ₱250.
         const TEST_AMOUNT = (() => {
             const v = parseInt(new URLSearchParams(location.search).get('test'), 10);
-            return Number.isInteger(v) && v >= 20 && v <= 250 ? v : null;
+            return Number.isInteger(v) && v >= 1 && v <= 250 ? v : null;
         })();
 
         if (TEST_AMOUNT) {

@@ -9,7 +9,7 @@
 // Body: { username: string, amount?: number (pesos, for testing only) }
 
 const VIP_PRICE_PESOS = 250;
-const TEST_MIN_PESOS = 20;
+const TEST_MIN_PESOS = 1;
 const USERNAME_RE = /^[A-Za-z0-9_]{1,16}$/;
 
 export default async function handler(req, res) {
