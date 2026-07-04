@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | The Crib</title>
+    <link rel="icon" type="image/png" href="crib.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-main: #3B82F6;
+            --accent-green: #10B981;
+            --bg-dark: #030712;
+            --text-main: #FFFFFF;
+            --text-muted: #CBD5E1;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: #3b2b1f;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.85);
+            z-index: -1;
+        }
+        .legal-page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+        h1 { font-family: 'Outfit', sans-serif; font-size: 2rem; margin-bottom: 8px; }
+        .updated { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 32px; }
+        h2 { font-size: 1.1rem; margin: 28px 0 10px; color: var(--accent-green); }
+        p, li { color: var(--text-muted); margin-bottom: 12px; }
+        ul { padding-left: 1.25rem; }
+        a { color: var(--accent-main); }
+        .back { display: inline-block; margin-bottom: 24px; font-size: 0.9rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <main class="legal-page">
+        <a href="index.html" class="back">← back to The Crib</a>
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: July 4, 2026</p>
+
+        <p>The Crib Minecraft server landing page (crib.stimmie.dev) explains how to join the server and optionally purchase VIP perks.</p>
+
+        <h2>What we collect</h2>
+        <ul>
+            <li><strong>Minecraft username</strong> — entered when starting VIP checkout so perks can be applied to the correct account.</li>
+            <li><strong>Payment details</strong> — processed by <a href="https://www.paymongo.com" target="_blank" rel="noopener">PayMongo</a> at checkout. We do not store full card numbers.</li>
+            <li><strong>Server status</strong> — public player counts from the game server API (no personal profiles).</li>
+            <li><strong>Technical logs</strong> — basic server logs for security and debugging.</li>
+        </ul>
+
+        <h2>What we do not do</h2>
+        <ul>
+            <li>We do <strong>not</strong> sell your personal data.</li>
+            <li>We do <strong>not</strong> use your information for third-party advertising.</li>
+            <li>We do <strong>not</strong> require payment to play on the public survival server.</li>
+        </ul>
+
+        <h2>In-game data</h2>
+        <p>Gameplay on the Minecraft server is subject to server rules. Chat and build data are stored as part of normal server operation for moderation and backups.</p>
+
+        <h2>Contact</h2>
+        <p>Questions: <a href="https://discord.gg/qdZfGqeubN" target="_blank" rel="noopener">Discord</a> or <a href="https://stimmie.dev">stimmie.dev</a>.</p>
+    </main>
+</body>
+</html>
